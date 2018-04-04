@@ -12,7 +12,8 @@
  *-------------------------------------------------------------------------*/
 
 #include	"header.h"
-
+extern int strLen;
+extern void swap();
 
 int		partition	(char**		array,
 				 char*		pivot,
