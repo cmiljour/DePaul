@@ -8,7 +8,10 @@ char begin;
 char end;
 
 int main(){
-	enterBeginEnd();
-	printFromBeginToEnd();
-	return(EXIT_SUCCESS);
+	int x = 2123456789;
+	float *p = &x;
+	float y = *p;
+	printf ("y=%f\n", y);
+	return 0;
+
 }

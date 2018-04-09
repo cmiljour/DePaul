@@ -12,8 +12,6 @@
  *-------------------------------------------------------------------------*/
 
 #include	"header.h"
-extern void swap();
-extern strLen;
 
 //  PURPOSE:  To sort the 'arrayLen' strings in array 'array' with the
 //	insertion-sort algorithm.  No return value.

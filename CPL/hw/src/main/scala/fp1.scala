@@ -69,28 +69,30 @@ object fp1 {
   // hardcoding the numbers 1,2,6,24,120.
   val factTest : List[Int] = {
     // TODO: Change "Nil" to the correct answer.
-    Nil
+    fact(1)::fact(2)::fact(3)::fact(4)::fact(5)::List()
   }
 
   // EXERCISE 2: complete the following definition of the Fibonacci function.
   def fib (n : Int) : Int = {
     // TODO: Provide definition here.
-    -1
+    if (n <= 1) {n}
+    else {
+      fib(n - 1) + fib ( n -2)
+    }
   }
-
   
   // EXERCISE 3: declare the identifier "p1" with a pair consisting of the Int 7 and the String
   // "hello"
   val p1 : (Int, String) = {
     // TODO: Provide definition here.
-    null
+    (7,"hello")
   }
 
   // EXERCISE 4: declare the identifier "t1" with a triple consisting of the Int 7, the String
   // "hello", and the Boolean false
   val t1 : (Int, String, Boolean) = {
     // TODO: Provide definition here.
-    null
+    (7,"hello",false)
   }
 
   // EXERCISE 5: write a function "swap" that takes a pair of an Int and a String, and returns a
@@ -99,7 +101,7 @@ object fp1 {
   // components of a pair.
   def swap (p:(Int,String)) : (String,Int) = {
     // TODO: Provide definition here.
-    null
+    (p._2,p._1)
   }
 
   // EXERCISE 6: write a function "sum" that takes a list of integers and sums them.  As with all of
@@ -107,9 +109,13 @@ object fp1 {
   // loop.
   def sum (xs : List[Int]) : Int = {
     // TODO: Provide definition here.
-    -1
+    xs match {
+      case Nil => 0
+      case y::ys => {
+        y + sum(ys)
+      }
+    }
   }
-
 
   // EXERCISE 7: given the definition of the function "sumTailAux" below, complete the
   // definition of the function "sumTail" so that it also sums a list of integers.  You
@@ -124,7 +130,7 @@ object fp1 {
 
   def sumTail (xs : List[Int]) : Int = {
     // TODO: Provide definition here.
-    -1
+    sumTailAux(0, xs) 
   }
 
 
@@ -134,8 +140,24 @@ object fp1 {
   // loop.  You MUST NOT use the "max" method on lists, but can use the "max" method on integers.
   def max (xs : List[Int]) : Int = {
     // TODO: Provide definition here.
-    -1
+    xs match {
+      case Nil => throw new NoSuchElementException("wrong")
+      case y::ys => {
+        maxAux(ys, y)
+      }
+    }
   }
+  
+  def maxAux (xs: List[Int], maxInt: Int) : Int = {
+    xs match {
+      case Nil => maxInt
+      case y::ys => {
+        if (y > maxInt) { maxAux(ys, y)}
+        else maxAux(ys, maxInt)
+      }
+    }
+  }
+
 
   // EXERCISE 9: given the definition of the function "maxTail" below, complete the
   // definition of the function "maxTailAux" so that "maxTail" also finds the
@@ -143,7 +165,13 @@ object fp1 {
   // definition for "maxTailAux" must be recursive and not use while loops.
   def maxTailAux (accumulator : Int, xs : List[Int]) : Int = {
     // TODO: Provide definition here.
-    -1
+    xs match {
+      case Nil => accumulator
+      case y::ys => {
+        if (y > accumulator) {maxTailAux(y, ys)}
+        else maxTailAux(accumulator, ys)
+      }
+    }
   }
 
   def maxTail (xs : List[Int]) : Int = {
@@ -158,7 +186,12 @@ object fp1 {
   // at both ends) one at a time.  If "start < end", the empty list must be returned.
   def otpu (start : Int, end : Int) : List[Int] = {
     // TODO: Provide definition here.
-    null
+    if (start < end) Nil
+    else start:: otpu(start - 1, end)
+  
   }
+
+
+
 }
 

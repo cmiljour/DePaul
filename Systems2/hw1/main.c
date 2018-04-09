@@ -12,8 +12,7 @@
  *-------------------------------------------------------------------------*/
 
 #include	"header.h"
-extern void quickSort();
-extern void insertionSort();
+
 
 #define		TEXT_LEN	256
 
@@ -30,6 +29,10 @@ void		swap		(char**		array,
 				)
 {
   // YOUR CODE HERE
+    char *holder; 
+    holder = array[index0];
+    array[index0] = array[index1];
+    array[index1] = holder;
 }
 
 
@@ -48,7 +51,9 @@ int		obtainIntInRange(const char*	descriptionCPtr,
   char		text[TEXT_LEN];
 
   // YOUR CODE HERE
-
+  printf("Please enter %s for (%d - %d)", descriptionCPtr, min, max);
+  fgets(text,TEXT_LEN,stdin);
+  entry = atoi(text);
   return(entry);
 }
 
@@ -138,3 +143,4 @@ int		main		()
   releaseMem(array,arrayLen);
   return(EXIT_SUCCESS);
 }
+	

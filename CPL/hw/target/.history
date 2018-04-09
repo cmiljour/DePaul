@@ -5,3 +5,26 @@ console
 exit
 console
 exit
+console
+exit
+console
+exit
+console
+exi
+exit
+console
+testOnly fp1tests
+testOnly fp1tests -- -n fp1ex01
+~testOnly fp1tests -- -n fp1ex01
+~testOnly fp1tests -- -n fp1ex02
+~testOnly fp1tests -- -n fp1ex03
+~testOnly fp1tests -- -n fp1ex04
+~testOnly fp1tests -- -n fp1ex05
+~testOnly fp1tests -- -n fp1ex06
+~testOnly fp1tests -- -n fp1ex07
+~testOnly fp1tests -- -n fp1ex08
+~testOnly fp1tests -- -n fp1ex09
+~testOnly fp1tests -- -n fp1ex10
+testOnly fp1tests
+console
+exit

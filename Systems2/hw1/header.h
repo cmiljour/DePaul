@@ -13,4 +13,8 @@
 #include	<string.h>
 
 // YOUR CODE HERE
+extern int strLen;
+extern void swap();
+extern void insertionSort();
+extern void quickSort();
 
