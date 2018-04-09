@@ -61,7 +61,7 @@ D) choice in main() can't be found because it is a put into memory at program ru
 
 question 7:  
 
-Optimization 1:  In insertion sort, the loop "for (j = i+1;  j < arrayLen;  j++)" is represented below.  The optimized version stores the arrayLen in a register instead of moving it every time the compare is need as in the unoptimized version
+Optimization 1:  In insertion sort, the loop "for (j = i+1;  j < arrayLen;  j++)" is represented below.  The optimized version stores the arrayLen in a register instead of moving it every time the compare is need as in the unoptimized version.  This saves ton of time in a loop.
 
 In insertion sort:
 
@@ -78,7 +78,7 @@ Unoptimized assign1-0
      e81:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
      e84:	7c 95                	jl     e1b <insertionSort+0x29>
 
-Optimization 2:  In this line of insertion sort "if ( strncmp(array[i],array[j],strLen) > 0 )",  Check out the amount of instructions required in the unoptimized version versus the optimized version below. Almost 5x the amount of instructions.  I believe 
+Optimization 2:  In this line of insertion sort "if ( strncmp(array[i],array[j],strLen) > 0 )",  Check out the amount of instructions required in the unoptimized version versus the optimized version below. Almost 5x the amount of instructions. 
 
 Optimized assign1-2
      dd7:	4b 8b 34 f7          	mov    (%r15,%r14,8),%rsi

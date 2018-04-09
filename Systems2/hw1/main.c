@@ -54,6 +54,13 @@ int		obtainIntInRange(const char*	descriptionCPtr,
   printf("Please enter %s for (%d - %d)", descriptionCPtr, min, max);
   fgets(text,TEXT_LEN,stdin);
   entry = atoi(text);
+
+  while ( entry < min || entry > max ){
+    printf("You did not enter correct range.  Please enter %s for (%d - %d)", descriptionCPtr, min,  max);
+    fgets(text,TEXT_LEN,stdin);
+    entry = atoi(text);
+  };
+
   return(entry);
 }
 
