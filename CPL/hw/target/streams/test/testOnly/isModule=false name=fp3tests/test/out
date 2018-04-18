@@ -1,0 +1,3 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mfp3tests:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- EX05 - delete2 *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  null did not equal List() (fp3tests.scala:42)[0m[0m

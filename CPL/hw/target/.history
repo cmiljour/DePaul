@@ -28,3 +28,9 @@ testOnly fp1tests -- -n fp1ex01
 testOnly fp1tests
 console
 exit
+~testOnly fp3tests -- -n fp1ex01
+~testOnly fp3tests -- -n fp3ex01
+~testOnly fp3tests -- -n fp3ex02
+~testOnly fp3tests -- -n fp3ex03
+~testOnly fp3tests -- -n fp3ex04
+~testOnly fp3tests -- -n fp3ex05

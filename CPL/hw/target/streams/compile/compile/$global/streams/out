@@ -1,21 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp1.scala:171:42: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : List[Int][0m
-[0m[[0m[31merror[0m] [0m[0m required: Int[0m
-[0m[[0m[31merror[0m] [0m[0m        if (y > accumulator) {maxTailAux(ys, y)}[0m
-[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp1.scala:171:46: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Int[0m
-[0m[[0m[31merror[0m] [0m[0m required: List[Int][0m
-[0m[[0m[31merror[0m] [0m[0m        if (y > accumulator) {maxTailAux(ys, y)}[0m
-[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp1.scala:172:25: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : List[Int][0m
-[0m[[0m[31merror[0m] [0m[0m required: Int[0m
-[0m[[0m[31merror[0m] [0m[0m        else maxTailAux(ys, accumulator)[0m
-[0m[[0m[31merror[0m] [0m[0m                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp1.scala:172:29: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Int[0m
-[0m[[0m[31merror[0m] [0m[0m required: List[Int][0m
-[0m[[0m[31merror[0m] [0m[0m        else maxTailAux(ys, accumulator)[0m
-[0m[[0m[31merror[0m] [0m[0m                            ^[0m
-[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:105:28: Boolean does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m      case z::zs if(x != z){z::xs} => delete1aux(x, ys, zs)[0m
+[0m[[0m[31merror[0m] [0m[0m                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

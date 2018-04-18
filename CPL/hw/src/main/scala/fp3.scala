@@ -38,7 +38,12 @@ object fp3 {
   // - member (3, List (4, 6, 8, 5)) == false
   def member (a : Int, xs : List[Int]) : Boolean = {
     // TODO: Provide definition here.
-    false
+    xs match {
+      case Nil => false
+      case y::ys if(y==a) => true
+      case y::ys => member(a, ys)
+    }
+    
   }
 
   // EXERCISE 2: complete the following recursive definition of an "allEqual" function
@@ -52,7 +57,18 @@ object fp3 {
   // - allEqual (List (5, 5, 5, 6)) == false
   def allEqual (xs : List[Int]) : Boolean = {
     // TODO: Provide definition here.
-    false
+    xs match {
+      case Nil => true
+      case y::ys => allEqualAux(ys, y) 
+    }
+  }
+
+  def allEqualAux (xs: List[Int], sameAsMe: Int) : Boolean = {
+    xs match{
+      case Nil => true
+      case y::ys if(y == sameAsMe) => allEqualAux(ys, y)
+      case y::ys if(y != sameAsMe) => false
+    }
   }
 
   // EXERCISE 3: complete the definition of the following function that computes the length of
@@ -65,7 +81,7 @@ object fp3 {
   // of the List class.
   def stringLengths (xs:List[String]) : List[(String, Int)] = {
     // TODO: Provide definition here.
-    null
+    xs.map(x => (x,x.length))
   }
 
   // EXERCISE 4: complete the function definition for "delete1" that takes
@@ -76,9 +92,21 @@ object fp3 {
   // - delete1 ("the", List ("the","the","was","a","product","of","the","1980s")) == List ("was","a","product","of","1980s")
   def delete1 [X] (x:X, ys:List[X]) : List[X] = {
     // TODO: Provide definition here.
-    null
+    var xs:List[X] = List[X]()
+    ys match {
+      case Nil => ys
+      case _ => delete1aux(x, ys, xs)
+    }
   }
 
+  def delete1aux [X] (x:X, ys:List[X], xs:List[X]) : List[X] = {
+    ys match{
+      case Nil => xs.reverse
+      case z::zs if(x != z) => delete1aux(x, zs, z::xs)
+      case z::zs if(x == z) => delete1aux(x, zs, xs)
+    }
+
+  }
 
   // EXERCISE 5: complete the function definition for "delete2" below.  It must 
   // have the same behavior as "delete1".  It must be written using "for comprehensions" 

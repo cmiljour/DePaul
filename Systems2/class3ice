@@ -1,0 +1,23 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int data = 2;
+int bss = 0;
+
+int main() {
+
+ int local = 10;
+ int* heapPtr = (int*)malloc(sizeof(int));
+
+ *heapPtr = 7;
+
+ pid_t pid = fork();
+ 
+ if (getPid == 0){
+ data++;bss++;local++;*heapPtr++;
+}
+ if (getPid == !0){
+ data--;bss--;local--;*heapPtr--;
+}
+
+}
