@@ -92,7 +92,7 @@ object fp3 {
   // - delete1 ("the", List ("the","the","was","a","product","of","the","1980s")) == List ("was","a","product","of","1980s")
   def delete1 [X] (x:X, ys:List[X]) : List[X] = {
     // TODO: Provide definition here.
-    var xs:List[X] = List[X]()
+    val xs:List[X] = List[X]()
     ys match {
       case Nil => ys
       case _ => delete1aux(x, ys, xs)
@@ -113,7 +113,7 @@ object fp3 {
   // and not use recursion explicitly.
   def delete2 [X] (x:X, ys:List[X]) : List[X] = {
     // TODO: Provide definition here.
-    null
+    for ( y <- ys; if (y != x)) yield y
   }
 
   // EXERCISE 6: complete the function definition for "delete3" below.  It must 
@@ -121,7 +121,7 @@ object fp3 {
   // builtin "filter" method for Lists and not use recursion explicitly.
   def delete3 [X] (x:X, ys:List[X]) : List[X] = {
     // TODO: Provide definition here.
-    null
+   ys filter (_ != x)
   }
 
   // EXERCISE 7: complete the function definition for "removeDupes1" below.
@@ -133,7 +133,19 @@ object fp3 {
   // - removeDupes1 (List (1,1,2,3,3,3,4,4,5,6,7,7,8,9,2,2,2,9)) == List (1,2,3,4,5,6,7,8,9,2,9)
   def removeDupes1 [X] (xs:List[X]) : List[X] = {
     // TODO: Provide definition here.
-    null
+    val zs:List[X] = List[X]()
+    xs match{
+      case Nil => Nil
+      case _::_ => removeDupes1aux(xs, zs)
+    }
+  }
+
+  def removeDupes1aux [X] (xs:List[X], zs:List[X]) : List[X] = {
+    xs match{
+      case Nil => zs
+      case y::ys => y match{ 
+        case removeDupes1Aux(xs,zs) => 
+    }
   }
 
 

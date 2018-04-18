@@ -34,3 +34,6 @@ exit
 ~testOnly fp3tests -- -n fp3ex03
 ~testOnly fp3tests -- -n fp3ex04
 ~testOnly fp3tests -- -n fp3ex05
+~testOnly fp3tests -- -n fp3ex04
+~testOnly fp3tests -- -n fp3ex06
+~testOnly fp3tests -- -n fp3ex07

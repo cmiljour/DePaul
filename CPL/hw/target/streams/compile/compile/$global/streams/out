@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:105:28: Boolean does not take parameters[0m
-[0m[[0m[31merror[0m] [0m[0m      case z::zs if(x != z){z::xs} => delete1aux(x, ys, zs)[0m
-[0m[[0m[31merror[0m] [0m[0m                           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:148:5: Missing closing brace `}' assumed here[0m
+[0m[[0m[31merror[0m] [0m[0m    }[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

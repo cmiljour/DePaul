@@ -1,3 +1,14 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mfp3tests:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- EX05 - delete2 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  null did not equal List() (fp3tests.scala:42)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- EX07 - removeDupes1 *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  java.util.NoSuchElementException: head of empty list[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.collection.immutable.Nil$.head(List.scala:428)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.collection.immutable.Nil$.head(List.scala:425)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at fp3$.removeDupes1aux(fp3.scala:146)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at fp3$.removeDupes1(fp3.scala:139)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at fp3tests.$anonfun$new$7(fp3tests.scala:53)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
