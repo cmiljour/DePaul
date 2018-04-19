@@ -1,7 +1,18 @@
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:146:28: illegal start of simple pattern[0m
-[0m[[0m[31merror[0m] [0m[0m      case y::ys ifzs == ys.head) => removeDupes1aux(ys, zs)[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:216:14: not found: type ys[0m
+[0m[[0m[31merror[0m] [0m[0m      case y:ys if (member(y, ys)) => allDistinct(ys)[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:216:28: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : List[Int][0m
+[0m[[0m[31merror[0m] [0m[0m required: Int[0m
+[0m[[0m[31merror[0m] [0m[0m      case y:ys if (member(y, ys)) => allDistinct(ys)[0m
 [0m[[0m[31merror[0m] [0m[0m                           ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:148:5: '=>' expected but '}' found.[0m
-[0m[[0m[31merror[0m] [0m[0m    }[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:216:31: not found: value ys[0m
+[0m[[0m[31merror[0m] [0m[0m      case y:ys if (member(y, ys)) => allDistinct(ys)[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:216:51: not found: value ys[0m
+[0m[[0m[31merror[0m] [0m[0m      case y:ys if (member(y, ys)) => allDistinct(ys)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:217:14: not found: type ys[0m
+[0m[[0m[31merror[0m] [0m[0m      case y:ys => false[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m5 errors found[0m

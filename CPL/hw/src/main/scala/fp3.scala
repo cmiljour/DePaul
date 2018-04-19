@@ -156,10 +156,20 @@ object fp3 {
   // - removeDupes2 (List (1,1,2,3,3,3,4,4,5,6,7,7,8,9,2,2,2,9)) == List ((2,1),(1,2),(3,3),(2,4),(1,5),(1,6),(2,7),(1,8),(1,9),(3,2),(1,9))
   def removeDupes2 [X] (xs:List[X]) : List[(Int, X)] = {
     // TODO: Provide definition here.
-    null
+    val zs:List[(Int,X)] = List[(Int,X)]()
+    xs match{
+     case Nil => Nil
+      case _::_ => removeDupes2aux(xs, zs, 1)
+    }
   }
-
-
+  
+  def removeDupes2aux [X] (xs:List[X], zs:List[(Int,X)], count: Int) : List[(Int, X)] = {
+    xs match {
+      case y::ys if (ys == Nil) => ((count,y)::zs).reverse
+      case y::ys if (y == ys.head) => removeDupes2aux(ys,zs, count = count + 1)
+      case y::ys if (y != ys.head) => removeDupes2aux(ys, (count,y)::zs, count=1)
+    }
+  }
 
   // EXERCISE 9: complete the following definition of a function that splits a list
   // into a pair of two lists.  The offset for the the split position is given
@@ -177,7 +187,17 @@ object fp3 {
   // and then a second traversal with "drop").
   def splitAt [X] (n:Int, xs:List[X]) : (List[X], List[X]) = {
     // TODO: Provide definition here.
-    null
+    val zs:List[X] = List[X]()
+    val ws:List[X] = List[X]()
+    splitAtaux(n, xs, ws, zs, 0)
+  }
+
+  def splitAtaux [X] (n:Int, xs:List[X], ws:List[X], zs:List[X], count:Int): (List[X], List[X]) = {
+    xs match{
+      case Nil => (ws.reverse, zs.reverse)
+      case y::ys if(count < n) => splitAtaux(n, ys, y::ws, zs, count = count + 1)
+      case y::ys if(count >= n)  => splitAtaux(n, ys, ws, y::zs, count = count + 1) 
+    }
   }
 
 
@@ -191,7 +211,12 @@ object fp3 {
   // - allDistinct (List (1,2,3,2,4,5)) == false
   def allDistinct (xs : List[Int]) : Boolean = {
     // TODO: Provide definition here.
-    false
+    xs match{
+      case Nil => true
+      case y::ys if(member(y, ys)==false) => allDistinct(ys)
+      case y::ys => false
+
+    }
   }
 }
 
