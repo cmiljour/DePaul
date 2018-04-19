@@ -142,14 +142,11 @@ object fp3 {
 
   def removeDupes1aux [X] (xs:List[X], zs:List[X]) : List[X] = {
     xs match{
-      case Nil => zs
-      case y::ys => y match{ 
-        case removeDupes1Aux(xs,zs) => 
+      case y::ys if (ys == Nil) => (y::zs).reverse 
+      case y::ys if (y == ys.head) => removeDupes1aux(ys, zs)
+      case y::ys if (y != ys.head) => removeDupes1aux(ys, y::zs)
     }
   }
-
-
-
   // EXERCISE 8: write a function "removeDupes2" that behaves like "removeDupes1",
   // but also includes a count of the number of consecutive duplicate
   // elements in the original list (thus producing a simple run-length

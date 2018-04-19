@@ -1,0 +1,7 @@
+[error] /home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:146:28: illegal start of simple pattern
+[error]       case y::ys ifzs == ys.head) => removeDupes1aux(ys, zs)
+[error]                            ^
+[error] /home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:148:5: '=>' expected but '}' found.
+[error]     }
+[error]     ^
+[error] two errors found
