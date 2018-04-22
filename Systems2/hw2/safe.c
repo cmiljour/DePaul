@@ -50,10 +50,11 @@ void sigTryNextDigitHandler (int sigNum, siginfo_t* infoPtr, void* dataPtr
 		if ((computeResponse(&comboNum3)) == SIG_RIGHT_DIGIT)
 		{
 			safeOpened = 1;
+			continueRunning = 0;
+
 		}
 		kill(infoPtr->si_pid,computeResponse(&comboNum3));
-		continueRunning = 0;
-	}
+			}
 }
 
 int main () {
