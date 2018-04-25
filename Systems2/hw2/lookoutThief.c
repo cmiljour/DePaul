@@ -32,7 +32,7 @@ void		sigAlarmHandler	(int	sigInt
   //  YOUR CODE HERE to send SIG_QUIT to both safePid and crackingThiefPid
   kill(safePid, SIG_QUIT);
   kill(crackingThiefPid, SIG_QUIT);
-  exit(SIGALRM);
+  
 }
 
 
@@ -47,7 +47,7 @@ void		sigChildHandler	(int	sigInt
 
   //  YOUR CODE HERE to send SIG_QUIT to safePid
   kill(safePid,SIG_QUIT);
-  exit(SIGCHLD);
+ 
 }
 
 
@@ -100,38 +100,13 @@ int		main		()
   }
 
   //  YOUR CODE HERE to wait for both child processes
+  
   int safePidStatus;
   int crackingThiefPidStatus;
   
-  safePid = waitpid(safePid,&safePidStatus,0);
-  crackingThiefPid = waitpid(crackingThiefPid,&crackingThiefPidStatus,0);
+  waitpid(safePid,&safePidStatus,0);
+  waitpid(crackingThiefPid,&crackingThiefPidStatus,0);
   
-  if (WIFEXITED(safePidStatus) ) 
-  {
-	  printf("Child %d did not crash ", safePid);
-
-	  if (WEXITSTATUS(safePidStatus) == EXIT_SUCCESS)
-		  printf("and it succeeded.\n");
-	  else
-		  printf("but it failed.\n");
-  }
-  else 
-	  printf("Child %d crashed.\n", safePid);
-
-
-
-  if (WIFEXITED(crackingThiefPidStatus) ) 
-  {
-          printf("Child %d did not crash ", crackingThiefPid);
-
-          if (WEXITSTATUS(safePidStatus) == EXIT_SUCCESS)
-                  printf("and it succeeded.\n");
-          else
-                  printf("but it failed.\n");
-  }
-  else 
-          printf("Child %d crashed.\n", crackingThiefPid);
-
   printf("(bye)\n");
   return(EXIT_SUCCESS);
 }

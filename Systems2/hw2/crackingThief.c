@@ -50,7 +50,7 @@ void		tryNextCombination
     break;
   }
 
-  printf("%s \"Okay, let's %d-%d-%d.\"\n",NAME,count0,count1,count2);
+  printf("%s \"Okay, let's try %d-%d-%d.\"\n",NAME,count0,count1,count2);
   //  YOUR CODE HERE to send SIG_TRY_NEXT_DIGIT to safePid
   kill(safePid,SIG_TRY_NEXT_DIGIT);
 
@@ -93,10 +93,10 @@ int		main		(int		argc,
   //  YOUR CODE HERE to check if have a command line argument
   ////////////////if ((argv[1][0]) == Null) printf("No command line argument!");
   //  YOUR CODE HERE to set safePid to the integer in the string in the command line argument
-  //safePid = argv[0];
+  
   safePid = atol(argv[1]);
-  //printf("SafePid = %d  \n", safePid);
-  struct sigaction	act;
+
+  // struct sigaction	act;
 
   //  YOUR CODE HERE to install sigIntHandler for SIG_QUIT
   signal(SIG_QUIT,sigIntHandler);

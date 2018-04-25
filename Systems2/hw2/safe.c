@@ -51,9 +51,10 @@ void sigTryNextDigitHandler (int sigNum, siginfo_t* infoPtr, void* dataPtr
 		{
 			safeOpened = 1;
 			continueRunning = 0;
+            kill(infoPtr->si_pid,SIG_RIGHT_DIGIT);
 
 		}
-		kill(infoPtr->si_pid,computeResponse(&comboNum3));
+		else kill(infoPtr->si_pid,SIG_WRONG_DIGIT);
 			}
 }
 
@@ -61,15 +62,17 @@ int main () {
 	
 	srand(getpid());
 	struct sigaction	act;
+    memset(&act,"\0",sizeof(act));
+
 	act.sa_flags = SA_SIGINFO;
-       	act.sa_sigaction = sigTryNextDigitHandler;
+    act.sa_sigaction = sigTryNextDigitHandler;
 	sigaction(SIG_TRY_NEXT_DIGIT, &act, NULL);
 	signal(SIG_QUIT, sigIntHandler);
 
 	comboNum1 = (rand() % 16) + 1;
 	comboNum2 = (rand() % 16) + 1;
 	comboNum3 = (rand() % 16) + 1;
-	printf("Combo: %d-%d-%d ", comboNum1, comboNum2, comboNum3);
+	printf("Combo: %d-%d-%d \n", comboNum1, comboNum2, comboNum3);
 
 	while (continueRunning)
 		sleep(1);
