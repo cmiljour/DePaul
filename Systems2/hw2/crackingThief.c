@@ -96,14 +96,18 @@ int		main		(int		argc,
   
   safePid = atol(argv[1]);
 
-  // struct sigaction	act;
+  struct sigaction	act;
+  memset(&act,"\0",sizeof(act));
 
   //  YOUR CODE HERE to install sigIntHandler for SIG_QUIT
-  signal(SIG_QUIT,sigIntHandler);
+  act.sa_handler = sigIntHandler;
+  sigaction(SIG_QUIT,&act, NULL);
   //  YOUR CODE HERE to install sigWrongDigitHandler for SIG_WRONG_DIGIT
-  signal(SIG_WRONG_DIGIT,sigWrongDigitHandler);
+  act.sa_handler = sigWrongDigitHandler;
+  sigaction(SIG_WRONG_DIGIT,&act, NULL);
   //  YOUR CODE HERE to install sigRightDigitHandler for SIG_RIGHT_DIGIT
-  signal(SIG_RIGHT_DIGIT,sigRightDigitHandler);
+  act.sa_handler = sigRightDigitHandler;
+  sigaction(SIG_RIGHT_DIGIT,&act, NULL);
 
   tryNextCombination();
 

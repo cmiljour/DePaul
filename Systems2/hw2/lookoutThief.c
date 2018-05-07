@@ -54,14 +54,16 @@ void		sigChildHandler	(int	sigInt
 int		main		()
 {
   int			time;
-  //struct sigaction	act;
+  struct sigaction	act;
 
   //  YOUR CODE HERE
-//  memset(&act,"\0",sizeof(act));
+  memset(&act,"\0",sizeof(act));
   //  Install sigAlarmHandler() as the SIGALRM handler
-  signal(SIGALRM, sigAlarmHandler);
+  act.sa_handler = sigAlarmHandler;
+  sigaction(SIGALRM,&act, NULL);
   //  Install sigChildHandler() as the SIGCHLD handler
-  signal(SIGCHLD, sigChildHandler);
+  act.sa_handler = sigChildHandler;
+  sigaction(SIGCHLD,&act, NULL);
 
   safePid	= fork(); //<-- Change that 0 to make a new process 
 

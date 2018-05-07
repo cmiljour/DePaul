@@ -67,7 +67,9 @@ int main () {
 	act.sa_flags = SA_SIGINFO;
     act.sa_sigaction = sigTryNextDigitHandler;
 	sigaction(SIG_TRY_NEXT_DIGIT, &act, NULL);
-	signal(SIG_QUIT, sigIntHandler);
+	
+    act.sa_handler = sigIntHandler;
+    sigaction(SIG_QUIT,&act, NULL);
 
 	comboNum1 = (rand() % 16) + 1;
 	comboNum2 = (rand() % 16) + 1;
