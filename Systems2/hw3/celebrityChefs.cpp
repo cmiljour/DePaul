@@ -38,7 +38,7 @@
 
 //  PURPOSE:  To tell how many Dish instances thta each Chef instance prepares,
 //	and that each Gourmand instance consumes.
-const int	NUM_DISHES_TO_DO		= 32;
+const int	NUM_DISHES_TO_DO		= 30;
 
 //  PURPOSE:  To tell the maximum number of seconds that it takes either to
 //	prepare or consume a dish.
@@ -502,7 +502,7 @@ class		Table
 
   //  PURPOSE:  To implement mutual exclusion.
   //  PERHAPS ADD SOME VARS HERE
-
+  pthread_mutex_t dishLock;
   //  II.  Disallowed auto-generated methods:
   //  No copy constructor:
   Table		(const Table&	source
@@ -524,12 +524,14 @@ public :
   		dishPtr_(NULL)
 		{
 		  //  PERHAPS INITIALIZE SOME VARS HERE
+		  pthread_mutex_init(&dishLock,NULL);
 		}
 
   //  PURPOSE:  To release resources.  No parameters.  No return value.
   ~Table	()
   		{
 		  //  PERHAPS DESTROY SOME VARS HERE
+		  pthread_mutex_destroy(&dishLock);
 		}
 
   //  V.  Accessors:
@@ -554,6 +556,16 @@ public :
   				)
   		{
 		  //  MAKE THIS THREAD-SAFE, PLEASE
+		 
+
+
+		  while (dishPtr_ != NULL) 
+		  {
+			  std::cout << chef
+			  << ":\"Hurry up, and clear the EFFIN table!\"\n";
+			  sleep(1);
+		  }
+ 		  pthread_mutex_lock(&dishLock);
 		  dishPtr_	= newDishPtr;
 		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
 		  std::cout
@@ -561,6 +573,7 @@ public :
 			<< ": \""
 			<< *getDishPtr()
 			<< " is served!\"\n";
+	          pthread_mutex_unlock(&dishLock);
 		}
 
   //  PURPOSE:  To have 'gourmand' attempt to remove 'dishPtr_' from '*this'
@@ -572,18 +585,29 @@ public :
   Dish*		eatFrom		(Gourmand&		gourmand
   				)
 		{
+		
 		  //  MAKE THIS THREAD-SAFE, PLEASE
-
 		  Dish*	toReturn	= getDishPtr();
+		  while (toReturn == NULL) 
+		  {
+			  std::cout << gourmand 
+			  << ":\"Hurry up, I am hungry!\"\n";
+			  sleep(1);
+			  toReturn = getDishPtr();
+		  }
+		  //pthread_mutex_lock(&dishLock);
 		  std::cout
 			<< gourmand
 			<< ": \"That "
 			<< *getDishPtr()
 			<< " looks yummy!\"\n";
 		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
+		  pthread_mutex_lock(&dishLock);
 		  dishPtr_  = NULL;
+		  pthread_mutex_unlock(&dishLock);
 		  return(toReturn);
-		}
+		  //pthread_mutex_unlock(&dishLock);
+		  		}
 };
 
 
@@ -597,14 +621,21 @@ Table		table;
 void*		cook	(void*		vPtr
 			)
 {
+
   Chef*	chefPtr	= (Chef*)vPtr;
+ 
+  Dish* preparedDish;
+  
+  
 
   //  PERHAPS A LOOP HERE
   int i;
   for (i = 1; i < NUM_DISHES_TO_DO;i++){
- 	chefPtr->prepare();
-	table.serve(chefPtr, chefPtr->prepare());
+  
+ 	preparedDish = chefPtr->prepare();
+	table.serve(*chefPtr,preparedDish);
   }
+  delete(chefPtr); 
   return(NULL /* CHANGE IF YOU WANT */);
 }
 
@@ -616,13 +647,16 @@ void*		eat	(void*		vPtr
 			)
 {
   Gourmand*	gourmandPtr	= (Gourmand*)vPtr;
+  Dish* aDishPtr;
 
   //  PERHAPS A LOOP HERE
   int i;
   for (i = 1; i < NUM_DISHES_TO_DO;i++){
-	table.eatFrom(gourmandPtr);
-	table.consume();
+       aDishPtr = table.eatFrom(*gourmandPtr);
+	gourmandPtr->consume(aDishPtr);
   }
+  
+  delete(gourmandPtr);
   return(NULL /* CHANGE IF YOU WANT */);
 }
 
@@ -649,12 +683,10 @@ int		main	(int		argc,
   //  PERHAPS A LOOP HERE
   int i;
   for (i = 1 ; i < NUM_CHEFS;i++){
-  	new Chef(i);
-	pthread_create(&chefIds[i], NULL,cook,(void*)&chefIds[i]); 
-	new Gourmand(i);
-	pthread_create(&gourmandIds[i], NULL,eat,(void*)&gourmandIds[i]);
+	pthread_create(&chefIds[i], NULL,cook,(void*)new Chef(i)); 
+	pthread_create(&gourmandIds[i], NULL,eat,(void*)new Gourmand(i));
   }
-
+  
   //  II.C.  Wait for Chef and Gourmand threads:
   //  PERHAPS A LOOP HERE
   for (i = 1; i < NUM_CHEFS;i++){
@@ -662,8 +694,8 @@ int		main	(int		argc,
 	int*  gourmandPtr;
   	pthread_join(chefIds[i], (void**)&chefPtr);
 	pthread_join(gourmandIds[i], (void**)&gourmandPtr);
-
   }
+
   //  III.  Finished:
   return(EXIT_SUCCESS);
 }

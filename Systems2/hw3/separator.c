@@ -72,7 +72,7 @@ char result[TEXT_LEN];
     strncpy(result, text,length);
     result[length] = '\0';
     insert(strdup(result));
-    strncpy(text, found+1, 100);
+    strncpy(text, found+1, 200);
     }
     
     printReverse(head);
