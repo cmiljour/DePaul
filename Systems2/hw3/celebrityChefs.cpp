@@ -503,6 +503,8 @@ class		Table
   //  PURPOSE:  To implement mutual exclusion.
   //  PERHAPS ADD SOME VARS HERE
   pthread_mutex_t dishLock;
+  pthread_cond_t  notEmpty_;
+  pthread_cond_t  notFull_;
   //  II.  Disallowed auto-generated methods:
   //  No copy constructor:
   Table		(const Table&	source
@@ -525,6 +527,8 @@ public :
 		{
 		  //  PERHAPS INITIALIZE SOME VARS HERE
 		  pthread_mutex_init(&dishLock,NULL);
+		  pthread_cond_init(&notEmpty_,NULL);
+		  pthread_cond_init(&notFull_,NULL);
 		}
 
   //  PURPOSE:  To release resources.  No parameters.  No return value.
@@ -532,6 +536,8 @@ public :
   		{
 		  //  PERHAPS DESTROY SOME VARS HERE
 		  pthread_mutex_destroy(&dishLock);
+		  pthread_cond_destroy(&notEmpty_);
+		  pthread_cond_destroy(&notFull_);
 		}
 
   //  V.  Accessors:
@@ -557,15 +563,15 @@ public :
   		{
 		  //  MAKE THIS THREAD-SAFE, PLEASE
 		 
-
-
+          pthread_mutex_lock(&dishLock);
 		  while (dishPtr_ != NULL) 
 		  {
 			  std::cout << chef
 			  << ":\"Hurry up, and clear the EFFIN table!\"\n";
-			  sleep(1);
+			 // sleep(1);
+			  pthread_cond_wait(&notFull_,&dishLock);
+			  
 		  }
- 		  pthread_mutex_lock(&dishLock);
 		  dishPtr_	= newDishPtr;
 		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
 		  std::cout
@@ -573,7 +579,8 @@ public :
 			<< ": \""
 			<< *getDishPtr()
 			<< " is served!\"\n";
-	          pthread_mutex_unlock(&dishLock);
+	      pthread_mutex_unlock(&dishLock);
+	      pthread_cond_signal(&notEmpty_);
 		}
 
   //  PURPOSE:  To have 'gourmand' attempt to remove 'dishPtr_' from '*this'
@@ -587,26 +594,29 @@ public :
 		{
 		
 		  //  MAKE THIS THREAD-SAFE, PLEASE
+		  pthread_mutex_lock(&dishLock);
 		  Dish*	toReturn	= getDishPtr();
 		  while (toReturn == NULL) 
 		  {
 			  std::cout << gourmand 
 			  << ":\"Hurry up, I am hungry!\"\n";
-			  sleep(1);
-			  toReturn = getDishPtr();
+			  //sleep(1);
+			  pthread_cond_wait(&notEmpty_,&dishLock);
+		          toReturn = getDishPtr();
+
 		  }
-		  //pthread_mutex_lock(&dishLock);
 		  std::cout
 			<< gourmand
 			<< ": \"That "
 			<< *getDishPtr()
 			<< " looks yummy!\"\n";
 		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
-		  pthread_mutex_lock(&dishLock);
+		  //pthread_mutex_lock(&dishLock);
 		  dishPtr_  = NULL;
 		  pthread_mutex_unlock(&dishLock);
+		  pthread_cond_signal(&notFull_);
 		  return(toReturn);
-		  //pthread_mutex_unlock(&dishLock);
+		  
 		  		}
 };
 
@@ -682,14 +692,14 @@ int		main	(int		argc,
 
   //  PERHAPS A LOOP HERE
   int i;
-  for (i = 1 ; i < NUM_CHEFS;i++){
+  for (i = 0 ; i < NUM_CHEFS;i++){
 	pthread_create(&chefIds[i], NULL,cook,(void*)new Chef(i)); 
 	pthread_create(&gourmandIds[i], NULL,eat,(void*)new Gourmand(i));
   }
   
   //  II.C.  Wait for Chef and Gourmand threads:
   //  PERHAPS A LOOP HERE
-  for (i = 1; i < NUM_CHEFS;i++){
+  for (i = 0; i < NUM_CHEFS;i++){
 	int*  chefPtr;
 	int*  gourmandPtr;
   	pthread_join(chefIds[i], (void**)&chefPtr);
