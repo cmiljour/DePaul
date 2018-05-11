@@ -563,25 +563,23 @@ public :
   		{
 		  //  MAKE THIS THREAD-SAFE, PLEASE
 		 
-          pthread_mutex_lock(&dishLock);
-		  while (dishPtr_ != NULL) 
-		  {
-			  std::cout << chef
-			  << ":\"Hurry up, and clear the EFFIN table!\"\n";
-			 // sleep(1);
-			  pthread_cond_wait(&notFull_,&dishLock);
-			  
-		  }
-		  dishPtr_	= newDishPtr;
-		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
-		  std::cout
-			<< chef
-			<< ": \""
-			<< *getDishPtr()
-			<< " is served!\"\n";
-	      pthread_mutex_unlock(&dishLock);
-	      pthread_cond_signal(&notEmpty_);
-		}
+  		pthread_mutex_lock(&dishLock);
+    		while (dishPtr_ != NULL) 
+                {
+      			std::cout << chef
+      			<< ":\"Hurry up, and clear the EFFIN table!\"\n";
+      			pthread_cond_wait(&notFull_,&dishLock);	  
+                }
+  		dishPtr_ = newDishPtr;
+  		sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
+  		std::cout
+       			<< chef
+       			<< ": \""
+       			<< *getDishPtr()
+       			<< " is served!\"\n";
+  		pthread_mutex_unlock(&dishLock);
+  		pthread_cond_signal(&notEmpty_);
+               }
 
   //  PURPOSE:  To have 'gourmand' attempt to remove 'dishPtr_' from '*this'
   //	Table (that is, return the old value of 'dishPtr_' and set it to
@@ -600,7 +598,6 @@ public :
 		  {
 			  std::cout << gourmand 
 			  << ":\"Hurry up, I am hungry!\"\n";
-			  //sleep(1);
 			  pthread_cond_wait(&notEmpty_,&dishLock);
 		          toReturn = getDishPtr();
 
@@ -611,13 +608,12 @@ public :
 			<< *getDishPtr()
 			<< " looks yummy!\"\n";
 		  sleep( (rand() % MAX_SLEEP_SECONDS) + 1);
-		  //pthread_mutex_lock(&dishLock);
 		  dishPtr_  = NULL;
 		  pthread_mutex_unlock(&dishLock);
 		  pthread_cond_signal(&notFull_);
 		  return(toReturn);
 		  
-		  		}
+	      }
 };
 
 

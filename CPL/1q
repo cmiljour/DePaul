@@ -1,0 +1,41 @@
+echo has('python')
+Plug 'mattn/emmet-vim'
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+c0
+%50, 57s/^ +//
+50,57s/^ +//
+50,57s/^ \+//
+set number
+set all
+set
+PluginStatus
+source ~/.vimrc
+PlugClean
+ESLINT
+Eslint
+ALEFix
+ALEFixSuggest
+ALE
+ALEInfo
+3dd
+W
+NeoFormat
+Neoformat
+PlugInstall
+Q
+PlugStatus
+d6
+delete
+delete 60
+delete 100
+delete 30
+wq!
+Lq
+delete 20
+q!
+s
+tag printReverse
+q
+wq
+w
+
