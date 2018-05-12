@@ -47,25 +47,16 @@ object argpass {
     // val r = new RefInt (0)
     // f (r)
     // val n : Int = r.get
-    def refint1aux(f : Unit, t: Int, res: Int) : (Int, Int, Int) = {
-       if (t == 0) res;
-       
-       f(r)
-       res: Int = r.get
-       (res, refint1aux(f, t - 1, 
-    
-    }
     val r = new RefInt (0)
-    refint1aux(f, 3, Null)
+
+    f(r)
+    val n1: Int = r.get
+    f(r)
+    val n2: Int = r.get
+    f(r)
+    val n3: Int = r.get
     
-    
-    //f(r)
-    //val n1: Int = r.get
-    //f(r)
-    //val n2: Int = r.get
-    //f(r)
-    //val n3: Int = r.get
-    //(n1,n2,n3)
+    (n1,n2,n3)
     
   }
 
@@ -78,7 +69,20 @@ object argpass {
   // Your code must return a tuple of the three integers provided by f in the order that they came back from calls, i.e., the integer from the first call to f is the first integer in the returned tuple.
   def refint2 (f : RefInt => Unit) : (Int, Int, Int) = {
     // TODO: Provide definition here.
-    (-1, -1, -1)
+    val r1 = new RefInt(0)
+    val r2 = new RefInt(0)
+    val r3 = new RefInt(0)
+
+    
+    val f1 = f(r1);
+    val f2 = f(r2);
+    val f3 = f(r3);
+
+    val n1: Int = r1.get  
+    val n2: Int = r2.get
+    val n3: Int = r3.get
+
+    (n1, n2, n3)
   }
 
   // EXERCISE 3: complete the following function.
@@ -86,7 +90,10 @@ object argpass {
   // Your code must increment (add 1 to) the RefInt it receives and return double the original value (stored in a separate RefInt instance) as the result.
   def refint3 (r : RefInt) : RefInt = {
     // TODO: Provide definition here.
-    null
+    val n1r1: Int = r.get
+    r.set(n1r1+1)
+    val r2 = new RefInt(n1r1 * 2)
+    r2
   }
 
   // EXERCISE 4: complete the following function.
@@ -97,7 +104,16 @@ object argpass {
   // Your code should return true if f has NOT changed the Int stored in the copy of r.  Otherwise it should return false.
   def refint4 (r : RefInt, f : RefInt => Unit) : Boolean = {
     // TODO: Provide definition here.
-    false
+    val rNum = r.get
+    val r2 = new RefInt(rNum)
+
+    f(r2)
+
+    val r2Num = r2.get
+
+    if (rNum == r2Num) true
+    else false
+
   }
 
   // EXERCISE 5: complete the following function.
@@ -107,6 +123,10 @@ object argpass {
   // You can assume that the list you receive is not empty.
   def refint5 (xs : List[RefInt]) : Unit = {
     // TODO: Provide definition here.
+   xs match {
+     case Nil => Unit
+     case x::xs => val xNum = x.get; x.set(xNum+1); refint5(xs);
+   }
   }
 }
 

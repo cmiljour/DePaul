@@ -1,7 +1,7 @@
-[error] /home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:146:28: illegal start of simple pattern
-[error]       case y::ys ifzs == ys.head) => removeDupes1aux(ys, zs)
-[error]                            ^
-[error] /home/cynics/DePaul/CPL/hw/src/main/scala/fp3.scala:148:5: '=>' expected but '}' found.
-[error]     }
-[error]     ^
+[error] /home/cynics/DePaul/CPL/hw/src/main/scala/argpass.scala:129:31: not found: value x
+[error]      case y::ys => val xNum = x.get; x.set(xNum+1); refint5(xs);
+[error]                               ^
+[error] /home/cynics/DePaul/CPL/hw/src/main/scala/argpass.scala:129:38: not found: value x
+[error]      case y::ys => val xNum = x.get; x.set(xNum+1); refint5(xs);
+[error]                                      ^
 [error] two errors found

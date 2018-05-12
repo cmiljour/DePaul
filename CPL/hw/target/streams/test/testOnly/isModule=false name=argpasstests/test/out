@@ -1,21 +1,6 @@
 [0m[[0m[0minfo[0m] [0m[0m[32margpasstests:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- EX01 - refint1[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- EX02 - refint2 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  (-1,-1,-1) did not equal (37,13,60) (argpasstests.scala:62)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- EX03 - refint3 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  88 did not equal 89 (argpasstests.scala:70)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- EX04 - refint4 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  false did not equal true (argpasstests.scala:79)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- EX05 - refint5 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  java.lang.RuntimeException: xs is unchanged![0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at argpasstests.$anonfun$new$10(argpasstests.scala:108)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.PropSpecLike$$anon$1.apply(PropSpecLike.scala:186)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  at UnitSpec.org$scalatest$concurrent$TimeLimitedTests$$super$withFixture(UnitSpec.scala:6)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- EX02 - refint2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- EX03 - refint3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- EX04 - refint4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- EX05 - refint5[0m[0m
