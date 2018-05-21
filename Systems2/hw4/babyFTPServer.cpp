@@ -342,7 +342,7 @@ void	getFile		(int		clientFD
   {
 	  int toSend = htonl(fd);
 	  write(clientFD,&toSend,sizeof(toSend));
-	  exit(EXIT_FAILURE);
+	  return;
   }
   //  II.C.  Attempt to get file's size:
   //  YOUR CODE HERE
