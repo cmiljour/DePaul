@@ -10,6 +10,7 @@ import view.gui.GuiWindow;
 import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
+import view.gui.MouseHandle;
 
 public class Main {
     public static void main(String[] args){
