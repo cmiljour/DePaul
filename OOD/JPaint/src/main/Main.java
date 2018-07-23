@@ -18,10 +18,9 @@ public class Main {
     public static void main(String[] args){
         PaintCanvas canvas = new PaintCanvas();
         IGuiWindow guiWindow = new GuiWindow(canvas);
-
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
-        MouseHandle mouseHandler = new MouseHandle(appState);
+        MouseHandle mouseHandler = new MouseHandle(appState, canvas);
         ((GuiWindow) guiWindow).addMouseListener(mouseHandler);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();

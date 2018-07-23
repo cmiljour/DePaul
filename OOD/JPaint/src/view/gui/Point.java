@@ -20,5 +20,7 @@ public class Point {
     public List<Integer> getPointList(){
         return pointList;
     }
+    public int getXpoint(){return x;};
+    public int getYpoint(){return y;};
 
 }
