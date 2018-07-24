@@ -24,11 +24,5 @@ public class Main {
         ((GuiWindow) guiWindow).addMouseListener(mouseHandler);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
-
-        //Graphics2D graphics2D = canvas.getGraphics2D();
-
-        //int[] xInts = new int[]{100, 100, 200};
-        //int[] yInts = new int[]{300, 450, 450};
-        //graphics2D.fillPolygon(xInts, yInts, 3);
     }
 }

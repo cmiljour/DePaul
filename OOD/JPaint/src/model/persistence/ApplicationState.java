@@ -7,6 +7,7 @@ import model.StartAndEndPointMode;
 import model.dialogs.DialogProvider;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
+import view.gui.ShapeConfiguration;
 import view.interfaces.IUiModule;
 
 public class ApplicationState implements IApplicationState {
@@ -74,6 +75,10 @@ public class ApplicationState implements IApplicationState {
     @Override
     public StartAndEndPointMode getActiveStartAndEndPointMode() {
         return activeStartAndEndPointMode;
+    }
+
+    public ShapeConfiguration getCurrentShapeConfiguration(){
+        return new ShapeConfiguration(activeShapeType, activePrimaryColor, activeSecondaryColor, activeShapeShadingType);
     }
 
     private void setDefaults() {

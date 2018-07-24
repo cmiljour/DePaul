@@ -2,6 +2,7 @@ package view.gui;
 
 import model.StartAndEndPointMode;
 import model.persistence.ApplicationState;
+import view.interfaces.ICommand;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,7 +14,6 @@ public class MouseHandle extends MouseAdapter {
     Point pointsPressed;
     Point pointsReleased;
     ApplicationState appState;
-    StartAndEndPointMode mode;
     PaintCanvas canvas;
 
     public MouseHandle(ApplicationState appState, PaintCanvas canvas){
@@ -22,7 +22,6 @@ public class MouseHandle extends MouseAdapter {
     }
 
     public void mousePressed(MouseEvent e){
-
         pointsPressed = new Point(e.getX(), e.getY());
         System.out.println(Arrays.toString(pointsPressed.getPointList().toArray()));
     }
@@ -31,26 +30,26 @@ public class MouseHandle extends MouseAdapter {
     public void mouseReleased(MouseEvent e) {
         pointsReleased = new Point(e.getX(), e.getY());
         System.out.println(Arrays.toString(pointsReleased.getPointList().toArray()));
-        mode = appState.getActiveStartAndEndPointMode();
-        switch (mode) {
+        ICommand command = null;
+        ShapeConfiguration activeShape = appState.getCurrentShapeConfiguration();
+        activeShape.setActivePointsPressed(pointsPressed);
+        activeShape.setActivePointsReleased(pointsReleased);
+
+        switch (appState.getActiveStartAndEndPointMode()) {
             case DRAW:
-
-                Graphics2D graphics2D = canvas.getGraphics2D();
-
-                int[] xInts = new int[]{pointsPressed.getXpoint(), pointsReleased.getXpoint(), pointsPressed.getXpoint() + pointsReleased.getXpoint() / 2};
-                int[] yInts = new int[]{pointsPressed.getYpoint(), pointsPressed.getYpoint(), pointsReleased.getYpoint()};
-                graphics2D.fillPolygon(xInts, yInts, 3);
-
+                command = new DrawCommand(canvas, activeShape);
                 break;
 
             case MOVE:
-
+                command = new DrawCommand(canvas, activeShape);
                 break;
 
             case SELECT:
-
+                command = new DrawCommand(canvas, activeShape);
                 break;
         }
+
+        command.run();
 
     }
 }
