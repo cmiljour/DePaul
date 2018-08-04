@@ -26,11 +26,35 @@ public class Ellipse implements IShape {
     @Override
     public void draw() {
 
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
-        ellipse = new Ellipse2D.Double(x,y,width,height);
-        graphics2d.setStroke(new BasicStroke(5));
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
-        graphics2d.draw(ellipse);
+        switch (activeShape.getActiveShapeShadingType()) {
+            case FILLED_IN:
 
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                ellipse = new Ellipse2D.Double(x,y,width,height);
+                graphics2d.fill(ellipse);
+                graphics2d.draw(ellipse);
+
+                break;
+
+            case OUTLINE:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                ellipse = new Ellipse2D.Double(x,y,width,height);
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.draw(ellipse);
+
+                break;
+
+            case OUTLINE_AND_FILLED_IN:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                ellipse = new Ellipse2D.Double(x,y,width,height);
+                graphics2d.fill(ellipse);
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
+                graphics2d.draw(ellipse);
+
+                break;
+        }
     }
 }

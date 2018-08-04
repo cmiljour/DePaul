@@ -29,10 +29,34 @@ public class Triangle implements IShape {
                 activeShape.getActivePointsReleased().getYpoint(),
                 activeShape.getActivePointsReleased().getYpoint()};
 
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
-        graphics2d.setStroke(new BasicStroke(5));
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
-        graphics2d.fillPolygon(xInts, yInts, 3);
+        switch (activeShape.getActiveShapeShadingType()) {
+
+            case FILLED_IN:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.fillPolygon(xInts, yInts, 3);
+
+                break;
+
+            case OUTLINE:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.drawPolygon(xInts, yInts, 3);
+
+                break;
+
+            case OUTLINE_AND_FILLED_IN:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.fillPolygon(xInts, yInts, 3);
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
+                graphics2d.drawPolygon(xInts, yInts, 3);
+
+                break;
+        }
+
 
     }
 }

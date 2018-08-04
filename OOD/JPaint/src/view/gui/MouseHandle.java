@@ -1,12 +1,15 @@
 package view.gui;
 
+import com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator;
 import model.StartAndEndPointMode;
 import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
+import view.interfaces.IShape;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -15,10 +18,13 @@ public class MouseHandle extends MouseAdapter {
     Point pointsReleased;
     ApplicationState appState;
     PaintCanvas canvas;
+    ShapeList shapeList;
+
 
     public MouseHandle(ApplicationState appState, PaintCanvas canvas){
         this.appState = appState;
         this.canvas = canvas;
+        shapeList = new ShapeList();
     }
 
     public void mousePressed(MouseEvent e){
@@ -37,19 +43,20 @@ public class MouseHandle extends MouseAdapter {
 
         switch (appState.getActiveStartAndEndPointMode()) {
             case DRAW:
-                command = new DrawCommand(canvas, activeShape);
+                command = new DrawCommand(shapeList, canvas, activeShape);
                 break;
 
             case MOVE:
-                command = new DrawCommand(canvas, activeShape);
+                command = new DrawCommand(shapeList, canvas, activeShape);
+
                 break;
 
             case SELECT:
-                command = new DrawCommand(canvas, activeShape);
+                command = new DrawCommand(shapeList, canvas, activeShape);
                 break;
         }
 
-        command.draw();
+        command.run();
 
     }
 }

@@ -1,5 +1,5 @@
 package view.interfaces;
 
 public interface ICommand {
-    public void draw();
+    public void run();
 }

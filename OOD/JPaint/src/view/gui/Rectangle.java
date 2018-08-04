@@ -24,11 +24,40 @@ public class Rectangle implements IShape {
     @Override
     public void draw() {
 
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
-        graphics2d.fillRect(x,y,width,height);
-        graphics2d.setStroke(new BasicStroke(5));
-        graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
-        graphics2d.drawRect(x,y,width,height);
+        switch (activeShape.getActiveShapeShadingType()) {
+            case FILLED_IN:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.fillRect(x,y,width,height);
+                graphics2d.drawRect(x,y,width,height);
+
+                break;
+
+            case OUTLINE:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.drawRect(x,y,width,height);
+
+
+                break;
+
+            case OUTLINE_AND_FILLED_IN:
+
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
+                graphics2d.fillRect(x,y,width,height);
+                graphics2d.setStroke(new BasicStroke(5));
+                graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
+                graphics2d.drawRect(x,y,width,height);
+
+
+                break;
+        }
+
+
+
+
+
 
     }
 }
