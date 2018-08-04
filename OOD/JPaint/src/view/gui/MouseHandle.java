@@ -49,7 +49,7 @@ public class MouseHandle extends MouseAdapter {
                 break;
         }
 
-        command.run();
+        command.draw();
 
     }
 }

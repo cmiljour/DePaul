@@ -33,6 +33,10 @@ public class ShapeConfiguration {
         return activeShapeType;
     }
 
+    public ShapeColor getActivePrimaryColor() {return activePrimaryColor; }
+
+    public ShapeColor getActiveSecondaryColor() {return activeSecondaryColor; }
+
     public void setShapeType(ShapeType activeShapeType){
         this.activeShapeType = activeShapeType;
     }
