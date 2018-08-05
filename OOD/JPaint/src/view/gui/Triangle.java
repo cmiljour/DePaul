@@ -3,7 +3,6 @@ package view.gui;
 import view.interfaces.IShape;
 
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 
 public class Triangle implements IShape {
 
@@ -58,5 +57,10 @@ public class Triangle implements IShape {
         }
 
 
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return null;
     }
 }

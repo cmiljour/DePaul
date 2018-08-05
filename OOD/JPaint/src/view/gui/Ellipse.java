@@ -57,4 +57,9 @@ public class Ellipse implements IShape {
                 break;
         }
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        return null;
+    }
 }

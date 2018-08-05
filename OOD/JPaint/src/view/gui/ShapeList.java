@@ -5,6 +5,7 @@ import view.interfaces.IShape;
 import java.util.ArrayList;
 
 public class ShapeList {
+
     private ArrayList<IShape> shapeList;
 
     public ShapeList(){
@@ -17,6 +18,9 @@ public class ShapeList {
 
     public void printList(){
         shapeList.forEach(System.out::println);
+    }
 
+    public ArrayList<IShape> getShapeList() {
+        return shapeList;
     }
 }

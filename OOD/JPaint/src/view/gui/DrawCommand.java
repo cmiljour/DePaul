@@ -47,7 +47,7 @@ public class DrawCommand implements ICommand {
 
             case RECTANGLE:
 
-                Rectangle rectangle = new Rectangle(x, y, width, height, canvas, activeShape);
+                MyRectangle rectangle = new MyRectangle(x, y, width, height, canvas, activeShape);
                 rectangle.draw();
                 shapeList.add(rectangle);
                 break;

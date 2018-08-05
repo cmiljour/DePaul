@@ -19,12 +19,14 @@ public class MouseHandle extends MouseAdapter {
     ApplicationState appState;
     PaintCanvas canvas;
     ShapeList shapeList;
+    SelectedShapeList selectedShapeList;
 
 
     public MouseHandle(ApplicationState appState, PaintCanvas canvas){
         this.appState = appState;
         this.canvas = canvas;
         shapeList = new ShapeList();
+        selectedShapeList = new SelectedShapeList();
     }
 
     public void mousePressed(MouseEvent e){
@@ -47,12 +49,12 @@ public class MouseHandle extends MouseAdapter {
                 break;
 
             case MOVE:
-                command = new DrawCommand(shapeList, canvas, activeShape);
+                command = new MoveCommand(pointsPressed, shapeList, selectedShapeList, canvas, activeShape);
 
                 break;
 
             case SELECT:
-                command = new DrawCommand(shapeList, canvas, activeShape);
+                command = new SelectCommand(pointsPressed, shapeList, selectedShapeList, canvas, activeShape);
                 break;
         }
 

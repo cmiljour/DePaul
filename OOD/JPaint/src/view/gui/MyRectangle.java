@@ -4,7 +4,7 @@ import view.interfaces.IShape;
 
 import java.awt.*;
 
-public class Rectangle implements IShape {
+public class MyRectangle implements IShape {
 
     private int x, y, width, height;
     Color color;
@@ -12,7 +12,9 @@ public class Rectangle implements IShape {
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
 
-    public Rectangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
+    Rectangle rectangle;
+
+    public MyRectangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -20,7 +22,13 @@ public class Rectangle implements IShape {
         this.activeShape = activeShape;
         this.canvas = canvas;
         this.graphics2d = canvas.getGraphics2D();
+        rectangle = new Rectangle(x,y,width,height);
     }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
     @Override
     public void draw() {
 
@@ -53,11 +61,6 @@ public class Rectangle implements IShape {
 
                 break;
         }
-
-
-
-
-
 
     }
 }

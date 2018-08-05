@@ -21,7 +21,8 @@ public class Main {
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
         MouseHandle mouseHandler = new MouseHandle(appState, canvas);
-        ((GuiWindow) guiWindow).addMouseListener(mouseHandler);
+        //((GuiWindow) guiWindow).addMouseListener(mouseHandler);
+        canvas.addMouseListener(mouseHandler);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
     }
