@@ -8,12 +8,19 @@ public class Triangle implements IShape {
 
     private ShapeConfiguration activeShape;
     Graphics2D graphics2d;
+    int x, y, width, height;
+    Rectangle rectangle;
 
 
-    public Triangle(PaintCanvas canvas, ShapeConfiguration activeShape) {
+    public Triangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape) {
 
         this.activeShape = activeShape;
         this.graphics2d = canvas.getGraphics2D();
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.rectangle = new Rectangle(x,y,width,height);
     }
 
     @Override
@@ -61,6 +68,32 @@ public class Triangle implements IShape {
 
     @Override
     public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    @Override
+    public Graphics2D getGraphics2D() {
         return null;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

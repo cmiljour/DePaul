@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class MoveCommand implements ICommand {
 
     ShapeList shapeList;
-    ArrayList<IShape> secondSelectedList;
+    ArrayList<IShape> arrayList;
     SelectedShapeList selectedShapeList;
     PaintCanvas canvas;
     ShapeConfiguration activeShape;
     private int x, y, width, height;
     Point pointsPressed;
-    ArrayList<IShape> secondList;
+    ArrayList<IShape> arraySelectedList;
 
 
 
@@ -28,27 +28,36 @@ public class MoveCommand implements ICommand {
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.pointsPressed = pointsPressed;
-        this.secondList = shapeList.getShapeList();
+        this.arrayList = shapeList.getShapeList();
         this.selectedShapeList = selectedShapeList;
-        this.secondSelectedList = selectedShapeList.getShapeList();
+        this.arraySelectedList = selectedShapeList.getShapeList();
     }
 
 
     @Override
     public void run() {
-        for (IShape shape : secondSelectedList) {
 
-            shape.draw();
-            //Rectangle rectangle = shape.getRectangle();
-            //System.out.println(rectangle);
-            //if (rectangle.contains(x, y)){
-            //    selectedShapeList.add(shape);
-           // }
+        //selectedShapeList.printList();
+        for (IShape shape : arraySelectedList) {
+
+            shape.setX(x);
+            shape.setY(y);
 
 
         }
 
-        selectedShapeList.printList();
+        Graphics2D graphics2D = canvas.getGraphics2D();
+        graphics2D.setColor(Color.white);
+        graphics2D.fillRect(0,0,100000,100000);
+
+
+        for (IShape shape : arrayList) {
+
+            shape.draw();
+           // shapeList.printList();
+        }
+
+        //selectedShapeList.printList();
 
     }
 }

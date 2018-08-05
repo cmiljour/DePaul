@@ -31,17 +31,18 @@ public class MouseHandle extends MouseAdapter {
 
     public void mousePressed(MouseEvent e){
         pointsPressed = new Point(e.getX(), e.getY());
-        System.out.println(Arrays.toString(pointsPressed.getPointList().toArray()));
+        //System.out.println(Arrays.toString(pointsPressed.getPointList().toArray()));
     }
 
 
     public void mouseReleased(MouseEvent e) {
         pointsReleased = new Point(e.getX(), e.getY());
-        System.out.println(Arrays.toString(pointsReleased.getPointList().toArray()));
+        //System.out.println(Arrays.toString(pointsReleased.getPointList().toArray()));
         ICommand command = null;
         ShapeConfiguration activeShape = appState.getCurrentShapeConfiguration();
         activeShape.setActivePointsPressed(pointsPressed);
         activeShape.setActivePointsReleased(pointsReleased);
+
 
         switch (appState.getActiveStartAndEndPointMode()) {
             case DRAW:
@@ -49,12 +50,13 @@ public class MouseHandle extends MouseAdapter {
                 break;
 
             case MOVE:
+
                 command = new MoveCommand(pointsPressed, shapeList, selectedShapeList, canvas, activeShape);
 
                 break;
 
             case SELECT:
-                command = new SelectCommand(pointsPressed, shapeList, selectedShapeList, canvas, activeShape);
+                command = new SelectCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape);
                 break;
         }
 

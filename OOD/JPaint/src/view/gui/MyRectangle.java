@@ -11,7 +11,6 @@ public class MyRectangle implements IShape {
     Graphics2D graphics2d;
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
-
     Rectangle rectangle;
 
     public MyRectangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
@@ -27,6 +26,31 @@ public class MyRectangle implements IShape {
 
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    @Override
+    public Graphics2D getGraphics2D() {
+        return graphics2d;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 
     @Override

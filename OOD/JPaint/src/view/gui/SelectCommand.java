@@ -14,11 +14,13 @@ public class SelectCommand implements ICommand {
     ShapeConfiguration activeShape;
     private int x, y, width, height;
     Point pointsPressed;
+    Point pointsReleased;
     ArrayList<IShape> secondList;
+    ArrayList<IShape> arraySelectedList;
 
 
 
-    public SelectCommand(Point pointsPressed, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
+    public SelectCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
         this.shapeList = shapeList;
         this.canvas = canvas;
         this.activeShape = activeShape;
@@ -27,23 +29,37 @@ public class SelectCommand implements ICommand {
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.pointsPressed = pointsPressed;
+        this.pointsReleased = pointsReleased;
         this.secondList = shapeList.getShapeList();
         this.selectedShapeList = selectedShapeList;
+        this.arraySelectedList = selectedShapeList.getShapeList();
     }
 
 
     @Override
     public void run() {
+
+        Boolean emptyPoint = true;
+        Rectangle selectorRectangle = new Rectangle(x,y, width, height);
+
         for (IShape shape : secondList) {
             Rectangle rectangle = shape.getRectangle();
 
-            //System.out.println(rectangle);
-            if (rectangle.contains(x, y)){
+            if (selectorRectangle.contains(shape.getX(),shape.getY()) && !(arraySelectedList.contains(shape))) {
                 selectedShapeList.add(shape);
+                emptyPoint = false;
             }
 
+            if (rectangle.contains(x, y) && !(arraySelectedList.contains(shape))) {
+                selectedShapeList.add(shape);
+                emptyPoint = false;
+            }
         }
 
+        if (emptyPoint){
+            arraySelectedList.clear();
+        }
+        
         selectedShapeList.printList();
 
     }

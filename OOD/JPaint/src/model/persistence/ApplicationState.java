@@ -82,7 +82,7 @@ public class ApplicationState implements IApplicationState {
     }
 
     private void setDefaults() {
-        activeShapeType = ShapeType.ELLIPSE;
+        activeShapeType = ShapeType.RECTANGLE;
         activePrimaryColor = ShapeColor.BLUE;
         activeSecondaryColor = ShapeColor.GREEN;
         activeShapeShadingType = ShapeShadingType.FILLED_IN;

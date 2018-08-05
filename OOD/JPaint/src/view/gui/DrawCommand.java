@@ -33,7 +33,7 @@ public class DrawCommand implements ICommand {
         switch (activeShape.getActiveShapeType()) {
             case TRIANGLE:
 
-                Triangle triangle = new Triangle(canvas, activeShape);
+                Triangle triangle = new Triangle(x, y, width, height, canvas, activeShape);
                 triangle.draw();
                 shapeList.add(triangle);
                 break;

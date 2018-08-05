@@ -16,6 +16,8 @@ public class ShapeList {
         shapeList.add(shape);
     }
 
+    public void remove(IShape shape) {shapeList.remove(shape); }
+
     public void printList(){
         shapeList.forEach(System.out::println);
     }

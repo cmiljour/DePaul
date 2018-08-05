@@ -13,6 +13,7 @@ public class Ellipse implements IShape {
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
     Ellipse2D.Double ellipse;
+    Rectangle rectangle;
 
     public Ellipse(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
         this.x = x;
@@ -22,6 +23,7 @@ public class Ellipse implements IShape {
         this.activeShape = activeShape;
         this.canvas = canvas;
         this.graphics2d = canvas.getGraphics2D();
+        rectangle = new Rectangle(x,y,width,height);
     }
     @Override
     public void draw() {
@@ -60,6 +62,31 @@ public class Ellipse implements IShape {
 
     @Override
     public Rectangle getRectangle() {
-        return null;
+        return rectangle;
+    }
+
+    @Override
+    public Graphics2D getGraphics2D() {
+        return graphics2d;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }
