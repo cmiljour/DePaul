@@ -54,6 +54,11 @@ public class MyRectangle implements IShape {
     }
 
     @Override
+    public ShapeConfiguration getActiveShape() {
+        return null;
+    }
+
+    @Override
     public void draw() {
 
         switch (activeShape.getActiveShapeShadingType()) {

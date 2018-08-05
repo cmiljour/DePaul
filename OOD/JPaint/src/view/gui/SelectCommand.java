@@ -41,9 +41,10 @@ public class SelectCommand implements ICommand {
 
         Boolean emptyPoint = true;
         Rectangle selectorRectangle = new Rectangle(x,y, width, height);
+        Rectangle rectangle;
 
         for (IShape shape : secondList) {
-            Rectangle rectangle = shape.getRectangle();
+            rectangle = shape.getRectangle();
 
             if (selectorRectangle.contains(shape.getX(),shape.getY()) && !(arraySelectedList.contains(shape))) {
                 selectedShapeList.add(shape);
@@ -59,7 +60,7 @@ public class SelectCommand implements ICommand {
         if (emptyPoint){
             arraySelectedList.clear();
         }
-        
+
         selectedShapeList.printList();
 
     }

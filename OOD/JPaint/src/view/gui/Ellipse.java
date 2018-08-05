@@ -89,4 +89,9 @@ public class Ellipse implements IShape {
     public int getY() {
         return y;
     }
+
+    @Override
+    public ShapeConfiguration getActiveShape() {
+        return null;
+    }
 }

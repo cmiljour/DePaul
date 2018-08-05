@@ -1,5 +1,7 @@
 package view.interfaces;
 
+import view.gui.ShapeConfiguration;
+
 import java.awt.*;
 
 public interface IShape {
@@ -10,4 +12,5 @@ public interface IShape {
     void setY(int y);
     public int getX();
     public int getY();
+    public ShapeConfiguration getActiveShape();
 }

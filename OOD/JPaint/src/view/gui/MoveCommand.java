@@ -6,6 +6,8 @@ import view.interfaces.IShape;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static model.ShapeType.TRIANGLE;
+
 public class MoveCommand implements ICommand {
 
     ShapeList shapeList;
@@ -15,11 +17,12 @@ public class MoveCommand implements ICommand {
     ShapeConfiguration activeShape;
     private int x, y, width, height;
     Point pointsPressed;
+    Point pointsReleased;
     ArrayList<IShape> arraySelectedList;
 
 
 
-    public MoveCommand(Point pointsPressed, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
+    public MoveCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
         this.shapeList = shapeList;
         this.canvas = canvas;
         this.activeShape = activeShape;
@@ -28,6 +31,7 @@ public class MoveCommand implements ICommand {
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.pointsPressed = pointsPressed;
+        this.pointsReleased = pointsReleased;
         this.arrayList = shapeList.getShapeList();
         this.selectedShapeList = selectedShapeList;
         this.arraySelectedList = selectedShapeList.getShapeList();
@@ -37,11 +41,20 @@ public class MoveCommand implements ICommand {
     @Override
     public void run() {
 
+        int xDiff;
+        int yDiff;
+
+
         //selectedShapeList.printList();
         for (IShape shape : arraySelectedList) {
 
-            shape.setX(x);
-            shape.setY(y);
+           // if (!(shape.getActiveShape().getActiveShapeType() == TRIANGLE)){
+                xDiff = shape.getX() - pointsPressed.getXpoint();
+                yDiff = shape.getY() - pointsPressed.getYpoint();
+                shape.setX(pointsReleased.getXpoint() + xDiff);
+                shape.setY(pointsReleased.getYpoint() + yDiff);
+
+            //}
 
 
         }

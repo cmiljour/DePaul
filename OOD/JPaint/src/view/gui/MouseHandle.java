@@ -45,14 +45,13 @@ public class MouseHandle extends MouseAdapter {
 
 
         switch (appState.getActiveStartAndEndPointMode()) {
+
             case DRAW:
                 command = new DrawCommand(shapeList, canvas, activeShape);
                 break;
 
             case MOVE:
-
-                command = new MoveCommand(pointsPressed, shapeList, selectedShapeList, canvas, activeShape);
-
+                command = new MoveCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape);
                 break;
 
             case SELECT:

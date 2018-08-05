@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Triangle implements IShape {
 
+
     private ShapeConfiguration activeShape;
     Graphics2D graphics2d;
     int x, y, width, height;
@@ -66,6 +67,9 @@ public class Triangle implements IShape {
 
     }
 
+
+
+
     @Override
     public Rectangle getRectangle() {
         return rectangle;
@@ -95,5 +99,10 @@ public class Triangle implements IShape {
     @Override
     public int getY() {
         return y;
+    }
+
+    @Override
+    public ShapeConfiguration getActiveShape() {
+        return activeShape;
     }
 }
