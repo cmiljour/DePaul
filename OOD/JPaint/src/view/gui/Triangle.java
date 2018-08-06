@@ -1,5 +1,6 @@
 package view.gui;
 
+import model.ShapeType;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -11,30 +12,32 @@ public class Triangle implements IShape {
     Graphics2D graphics2d;
     int x, y, width, height;
     Rectangle rectangle;
+    int[] xInts;
+    int[] yInts;
 
 
     public Triangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape) {
 
         this.activeShape = activeShape;
         this.graphics2d = canvas.getGraphics2D();
-        this.x = x;
-        this.y = y;
+        this.x = activeShape.getActivePointsPressed().getXpoint();
+        this.y = activeShape.getActivePointsPressed().getYpoint();
         this.width = width;
         this.height = height;
         this.rectangle = new Rectangle(x,y,width,height);
-    }
-
-    @Override
-    public void draw() {
-        int[] xInts = new int[]{
+        this.xInts = new int[]{
                 activeShape.getActivePointsPressed().getXpoint(),
                 activeShape.getActivePointsReleased().getXpoint(),
                 activeShape.getActivePointsPressed().getXpoint()};
 
-        int[] yInts = new int[]{
+        this.yInts = new int[]{
                 activeShape.getActivePointsPressed().getYpoint(),
                 activeShape.getActivePointsReleased().getYpoint(),
                 activeShape.getActivePointsReleased().getYpoint()};
+    }
+
+    @Override
+    public void draw() {
 
         switch (activeShape.getActiveShapeShadingType()) {
 
@@ -66,9 +69,6 @@ public class Triangle implements IShape {
 
 
     }
-
-
-
 
     @Override
     public Rectangle getRectangle() {
@@ -102,7 +102,29 @@ public class Triangle implements IShape {
     }
 
     @Override
-    public ShapeConfiguration getActiveShape() {
-        return activeShape;
+    public ShapeType getActiveShape() {
+        return activeShape.getActiveShapeType();
     }
+
+    @Override
+    public void setXarr(int index, int newVal) {
+        xInts[index] = newVal;
+    }
+
+    @Override
+    public void setYarr(int index, int newVal) {
+        yInts[index] = newVal;
+    }
+
+    @Override
+    public int getXarrIndex(int index) {
+        return xInts[index];
+    }
+
+    @Override
+    public int getYarrIndex(int index) {
+        return yInts[index];
+    }
+
+
 }

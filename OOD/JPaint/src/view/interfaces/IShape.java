@@ -1,5 +1,6 @@
 package view.interfaces;
 
+import model.ShapeType;
 import view.gui.ShapeConfiguration;
 
 import java.awt.*;
@@ -12,5 +13,9 @@ public interface IShape {
     void setY(int y);
     public int getX();
     public int getY();
-    public ShapeConfiguration getActiveShape();
+    public ShapeType getActiveShape();
+    public void setXarr(int index, int newVal);
+    public void setYarr(int index, int newVal);
+    public int getXarrIndex(int index);
+    public int getYarrIndex(int index);
 }

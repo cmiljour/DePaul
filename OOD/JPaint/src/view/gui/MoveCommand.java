@@ -43,21 +43,38 @@ public class MoveCommand implements ICommand {
 
         int xDiff;
         int yDiff;
+        int xDiff0;
+        int yDiff0;
+        int xDiff1;
+        int yDiff1;
+        int xDiff2;
+        int yDiff2;
 
 
         //selectedShapeList.printList();
-        for (IShape shape : arraySelectedList) {
+        for (IShape shape : arraySelectedList)
+            if (shape.getActiveShape() == TRIANGLE) {
+                xDiff0 = shape.getXarrIndex(0) - pointsPressed.getXpoint();
+                xDiff1 = shape.getXarrIndex(1) - pointsPressed.getXpoint();
+                xDiff2 = shape.getXarrIndex(2) - pointsPressed.getXpoint();
+                yDiff0 = shape.getYarrIndex(0) - pointsPressed.getYpoint();
+                yDiff1 = shape.getYarrIndex(1) - pointsPressed.getYpoint();
+                yDiff2 = shape.getYarrIndex(2) - pointsPressed.getYpoint();
 
-           // if (!(shape.getActiveShape().getActiveShapeType() == TRIANGLE)){
+                shape.setXarr(0, pointsReleased.getXpoint() + xDiff0);
+                shape.setXarr(1, pointsReleased.getXpoint() + xDiff1);
+                shape.setXarr(2, pointsReleased.getXpoint() + xDiff2);
+                shape.setYarr(0, pointsReleased.getYpoint() + yDiff0);
+                shape.setYarr(1, pointsReleased.getYpoint() + yDiff1);
+                shape.setYarr(2, pointsReleased.getYpoint() + yDiff2);
+
+            } else {
+
                 xDiff = shape.getX() - pointsPressed.getXpoint();
                 yDiff = shape.getY() - pointsPressed.getYpoint();
                 shape.setX(pointsReleased.getXpoint() + xDiff);
                 shape.setY(pointsReleased.getYpoint() + yDiff);
-
-            //}
-
-
-        }
+            }
 
         Graphics2D graphics2D = canvas.getGraphics2D();
         graphics2D.setColor(Color.white);

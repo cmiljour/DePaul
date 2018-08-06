@@ -1,5 +1,6 @@
 package view.gui;
 
+import model.ShapeType;
 import view.interfaces.IShape;
 
 import java.awt.*;
@@ -54,8 +55,28 @@ public class MyRectangle implements IShape {
     }
 
     @Override
-    public ShapeConfiguration getActiveShape() {
+    public ShapeType getActiveShape() {
         return null;
+    }
+
+    @Override
+    public void setXarr(int index, int newVal) {
+
+    }
+
+    @Override
+    public void setYarr(int index, int newVal) {
+
+    }
+
+    @Override
+    public int getXarrIndex(int index) {
+        return 0;
+    }
+
+    @Override
+    public int getYarrIndex(int index) {
+        return 0;
     }
 
     @Override
