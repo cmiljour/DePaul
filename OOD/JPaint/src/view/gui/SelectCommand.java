@@ -1,5 +1,6 @@
 package view.gui;
 
+import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
 import view.interfaces.IShape;
 
@@ -17,10 +18,11 @@ public class SelectCommand implements ICommand {
     Point pointsReleased;
     ArrayList<IShape> secondList;
     ArrayList<IShape> arraySelectedList;
+    ApplicationState appState;
 
 
 
-    public SelectCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
+    public SelectCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape, ApplicationState appState) {
         this.shapeList = shapeList;
         this.canvas = canvas;
         this.activeShape = activeShape;
@@ -33,6 +35,7 @@ public class SelectCommand implements ICommand {
         this.secondList = shapeList.getShapeList();
         this.selectedShapeList = selectedShapeList;
         this.arraySelectedList = selectedShapeList.getShapeList();
+        this.appState = appState;
     }
 
 

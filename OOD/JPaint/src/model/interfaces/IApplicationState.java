@@ -4,6 +4,10 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
+import view.gui.CopyShapeList;
+import view.gui.PaintCanvas;
+import view.gui.SelectedShapeList;
+import view.gui.ShapeList;
 
 public interface IApplicationState {
     void setActiveShape();
@@ -25,4 +29,26 @@ public interface IApplicationState {
     ShapeShadingType getActiveShapeShadingType();
 
     StartAndEndPointMode getActiveStartAndEndPointMode();
+
+    void setSelectedShapeList(SelectedShapeList selectedShapeList);
+
+    SelectedShapeList getSelectedShapeList();
+
+    ShapeList getShapeList();
+
+    void setShapeList(ShapeList shapeList);
+
+    void setCanvas(PaintCanvas canvas);
+
+    PaintCanvas getCanvas();
+
+    void deleteShapes();
+
+    void copyShapes();
+
+    void setCopyShapeList(CopyShapeList copyShapeList);
+
+    CopyShapeList getCopyShapeList();
+
+    void pasteShapes();
 }

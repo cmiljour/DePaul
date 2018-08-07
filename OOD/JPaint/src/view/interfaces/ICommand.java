@@ -1,5 +1,7 @@
 package view.interfaces;
 
+import java.io.IOException;
+
 public interface ICommand {
-    public void run();
+    public void run() throws IOException;
 }

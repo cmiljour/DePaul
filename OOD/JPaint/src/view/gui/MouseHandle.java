@@ -9,6 +9,7 @@ import view.interfaces.IShape;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,6 +21,7 @@ public class MouseHandle extends MouseAdapter {
     PaintCanvas canvas;
     ShapeList shapeList;
     SelectedShapeList selectedShapeList;
+    CopyShapeList copyShapeList;
 
 
     public MouseHandle(ApplicationState appState, PaintCanvas canvas){
@@ -27,6 +29,10 @@ public class MouseHandle extends MouseAdapter {
         this.canvas = canvas;
         shapeList = new ShapeList();
         selectedShapeList = new SelectedShapeList();
+        appState.setShapeList(shapeList);
+        appState.setSelectedShapeList(selectedShapeList);
+        appState.setCanvas(canvas);
+        copyShapeList = appState.getCopyShapeList();
     }
 
     public void mousePressed(MouseEvent e){
@@ -55,11 +61,15 @@ public class MouseHandle extends MouseAdapter {
                 break;
 
             case SELECT:
-                command = new SelectCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape);
+                command = new SelectCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape, appState);
                 break;
         }
 
-        command.run();
+        try {
+            command.run();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
     }
 }
