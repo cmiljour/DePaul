@@ -54,8 +54,16 @@ public class SelectCommand implements ICommand {
                 emptyPoint = false;
             }
 
+            if (selectorRectangle.contains(shape.getX(),shape.getY()) && arraySelectedList.contains(shape)) {
+                emptyPoint = false;
+            }
+
             if (rectangle.contains(x, y) && !(arraySelectedList.contains(shape))) {
                 selectedShapeList.add(shape);
+                emptyPoint = false;
+            }
+
+            if (rectangle.contains(x, y) && arraySelectedList.contains(shape)) {
                 emptyPoint = false;
             }
         }
@@ -64,7 +72,11 @@ public class SelectCommand implements ICommand {
             arraySelectedList.clear();
         }
 
+        System.out.println("selectedShapeList:");
         selectedShapeList.printList();
+
+        System.out.println("shapeList");
+        shapeList.printList();
 
     }
 }

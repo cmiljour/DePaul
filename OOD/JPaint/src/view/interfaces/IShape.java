@@ -18,4 +18,8 @@ public interface IShape {
     public void setYarr(int index, int newVal);
     public int getXarrIndex(int index);
     public int getYarrIndex(int index);
+    public void setRectangle(Rectangle rectangle);
+    public int getWidth();
+    public int getHeight();
+    ShapeConfiguration getActiveShapeConfiguration();
 }

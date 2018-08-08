@@ -126,5 +126,25 @@ public class Triangle implements IShape {
         return yInts[index];
     }
 
+    @Override
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public ShapeConfiguration getActiveShapeConfiguration() {
+        return this.activeShape;
+    }
+
 
 }

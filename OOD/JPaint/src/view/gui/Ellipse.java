@@ -93,7 +93,7 @@ public class Ellipse implements IShape {
 
     @Override
     public ShapeType getActiveShape() {
-        return null;
+        return activeShape.getActiveShapeType();
     }
 
     @Override
@@ -114,6 +114,26 @@ public class Ellipse implements IShape {
     @Override
     public int getYarrIndex(int index) {
         return 0;
+    }
+
+    @Override
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public ShapeConfiguration getActiveShapeConfiguration() {
+        return this.activeShape;
     }
 
 

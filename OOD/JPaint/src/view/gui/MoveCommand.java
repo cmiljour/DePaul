@@ -50,6 +50,8 @@ public class MoveCommand implements ICommand {
         int xDiff2;
         int yDiff2;
 
+        Graphics2D graphics2D = canvas.getGraphics2D();
+
 
         //selectedShapeList.printList();
         for (IShape shape : arraySelectedList)
@@ -68,17 +70,24 @@ public class MoveCommand implements ICommand {
                 shape.setYarr(1, pointsReleased.getYpoint() + yDiff1);
                 shape.setYarr(2, pointsReleased.getYpoint() + yDiff2);
 
+                shape.setRectangle(new Rectangle (pointsReleased.getXpoint() + xDiff0,  pointsReleased.getYpoint() + yDiff0, shape.getWidth(), shape.getHeight() ));
+
+
             } else {
 
                 xDiff = shape.getX() - pointsPressed.getXpoint();
                 yDiff = shape.getY() - pointsPressed.getYpoint();
                 shape.setX(pointsReleased.getXpoint() + xDiff);
                 shape.setY(pointsReleased.getYpoint() + yDiff);
+                shape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
+
             }
 
-        Graphics2D graphics2D = canvas.getGraphics2D();
+
         graphics2D.setColor(Color.white);
         graphics2D.fillRect(0,0,100000,100000);
+
+
 
 
         for (IShape shape : arrayList) {

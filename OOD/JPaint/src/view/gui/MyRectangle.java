@@ -5,13 +5,21 @@ import view.interfaces.IShape;
 
 import java.awt.*;
 
+import static model.ShapeType.RECTANGLE;
+
 public class MyRectangle implements IShape {
 
-    private int x, y, width, height;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
     Color color;
     Graphics2D graphics2d;
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
+
+
+
     Rectangle rectangle;
 
     public MyRectangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
@@ -22,11 +30,27 @@ public class MyRectangle implements IShape {
         this.activeShape = activeShape;
         this.canvas = canvas;
         this.graphics2d = canvas.getGraphics2D();
-        rectangle = new Rectangle(x,y,width,height);
+        this.rectangle = new Rectangle(x,y,width,height);
     }
 
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public ShapeConfiguration getActiveShapeConfiguration(){
+        return this.activeShape;
     }
 
     @Override
@@ -56,7 +80,7 @@ public class MyRectangle implements IShape {
 
     @Override
     public ShapeType getActiveShape() {
-        return null;
+        return activeShape.getActiveShapeType();
     }
 
     @Override
