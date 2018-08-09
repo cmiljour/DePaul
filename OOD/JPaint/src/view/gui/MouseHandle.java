@@ -19,49 +19,52 @@ public class MouseHandle extends MouseAdapter {
     Point pointsReleased;
     ApplicationState appState;
     PaintCanvas canvas;
-    ShapeList shapeList;
-    SelectedShapeList selectedShapeList;
+    //ShapeList shapeList;
+    //SelectedShapeList selectedShapeList;
     CopyShapeList copyShapeList;
+    ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
+    ShapeConfiguration activeShape;
+    ICommand command = null;
 
 
     public MouseHandle(ApplicationState appState, PaintCanvas canvas){
         this.appState = appState;
         this.canvas = canvas;
-        shapeList = new ShapeList();
-        selectedShapeList = new SelectedShapeList();
-        appState.setShapeList(shapeList);
-        appState.setSelectedShapeList(selectedShapeList);
+        this.shapeListReDrawCommandHandler = appState.getShapeListReDrawCommandHandler();
+        //shapeList = new ShapeList();
+        //selectedShapeList = new SelectedShapeList();
+        //appState.setShapeList(shapeList);
+        //appState.setSelectedShapeList(selectedShapeList);
         appState.setCanvas(canvas);
-        copyShapeList = appState.getCopyShapeList();
+        //appState.setDrawShape(new DrawShape(shapeList));
+        //copyShapeList = appState.getCopyShapeList();
+        //shapeListReDrawCommandHandler.registerObserver(appState.getDrawShape());
     }
 
     public void mousePressed(MouseEvent e){
+        this.activeShape = appState.getCurrentShapeConfiguration();
         pointsPressed = new Point(e.getX(), e.getY());
-        //System.out.println(Arrays.toString(pointsPressed.getPointList().toArray()));
+        activeShape.setActivePointsPressed(pointsPressed);
+
     }
 
 
     public void mouseReleased(MouseEvent e) {
         pointsReleased = new Point(e.getX(), e.getY());
-        //System.out.println(Arrays.toString(pointsReleased.getPointList().toArray()));
-        ICommand command = null;
-        ShapeConfiguration activeShape = appState.getCurrentShapeConfiguration();
-        activeShape.setActivePointsPressed(pointsPressed);
         activeShape.setActivePointsReleased(pointsReleased);
-
 
         switch (appState.getActiveStartAndEndPointMode()) {
 
             case DRAW:
-                command = new DrawCommand(shapeList, canvas, activeShape);
+                command = new DrawCommand(appState, activeShape);
                 break;
 
             case MOVE:
-                command = new MoveCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape);
+                command = new MoveCommand(appState, activeShape);
                 break;
 
             case SELECT:
-                command = new SelectCommand(pointsPressed, pointsReleased, shapeList, selectedShapeList, canvas, activeShape, appState);
+                command = new SelectCommand(appState, activeShape);
                 break;
         }
 

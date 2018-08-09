@@ -5,12 +5,9 @@ import controller.JPaintController;
 import model.dialogs.DialogProvider;
 import model.interfaces.IDialogProvider;
 import model.persistence.ApplicationState;
-import view.gui.Gui;
-import view.gui.GuiWindow;
-import view.gui.PaintCanvas;
+import view.gui.*;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
-import view.gui.MouseHandle;
 
 import java.awt.*;
 
@@ -25,5 +22,6 @@ public class Main {
         canvas.addMouseListener(mouseHandler);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
+
     }
 }

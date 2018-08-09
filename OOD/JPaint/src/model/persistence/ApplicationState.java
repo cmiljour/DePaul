@@ -16,12 +16,11 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static model.ShapeType.TRIANGLE;
+
 
 public class ApplicationState implements IApplicationState {
     private final IUiModule uiModule;
     private final IDialogProvider dialogProvider;
-
     private ShapeType activeShapeType;
     private ShapeColor activePrimaryColor;
     private ShapeColor activeSecondaryColor;
@@ -30,9 +29,9 @@ public class ApplicationState implements IApplicationState {
     private SelectedShapeList selectedShapeList;
     private ShapeList shapeList;
     private PaintCanvas canvas;
-    ArrayList<IShape> selectedArrayShapeList;
-    ArrayList<IShape> shapeArrayList;
-    ArrayList<IShape> copyArrayShapeList;
+    ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
+
+    DrawShape drawShape;
 
 
     private CopyShapeList copyShapeList;
@@ -41,8 +40,13 @@ public class ApplicationState implements IApplicationState {
     public ApplicationState(IUiModule uiModule) {
         this.uiModule = uiModule;
         this.dialogProvider = new DialogProvider(this);
+        this.shapeList = new ShapeList();
+        this.selectedShapeList = new SelectedShapeList();
         this.copyShapeList = new CopyShapeList();
         setDefaults();
+        this.shapeListReDrawCommandHandler = new ShapeListReDrawCommandHandler();
+        this.drawShape = new DrawShape(shapeList);
+        shapeListReDrawCommandHandler.registerObserver(drawShape);
     }
 
     @Override
@@ -125,6 +129,18 @@ public class ApplicationState implements IApplicationState {
 
     public void setCopyShapeList(CopyShapeList copyShapeList) {
         this.copyShapeList = copyShapeList;
+    }
+
+    public ShapeListReDrawCommandHandler getShapeListReDrawCommandHandler() {
+        return shapeListReDrawCommandHandler;
+    }
+
+    public DrawShape getDrawShape() {
+        return drawShape;
+    }
+
+    public void setDrawShape(DrawShape drawShape) {
+        this.drawShape = drawShape;
     }
 
     public void deleteShapes(){

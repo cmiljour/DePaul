@@ -1,9 +1,9 @@
 package view.gui;
 
-import model.ShapeColor;
-import model.ShapeType;
+
 import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
+
 
 import java.awt.*;
 
@@ -12,23 +12,28 @@ public class DrawCommand implements ICommand {
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
     private int x, y, width, height;
+    private ApplicationState appState;
+    private ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
     ShapeList shapeList;
 
 
-    public DrawCommand(ShapeList shapeList, PaintCanvas canvas, ShapeConfiguration activeShape){
-        this.canvas = canvas;
+
+    public DrawCommand(ApplicationState appState, ShapeConfiguration activeShape){
+
         this.activeShape = activeShape;
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
-        this.shapeList = shapeList;
+        this.appState = appState;
+//        this.shapeListReDrawCommandHandler = appState.getShapeListReDrawCommandHandler();
+        this.shapeList = appState.getShapeList();
+        this.canvas = appState.getCanvas();
     }
 
 
     @Override
     public void run() {
-        Graphics2D graphics2D = canvas.getGraphics2D();
 
         switch (activeShape.getActiveShapeType()) {
             case TRIANGLE:

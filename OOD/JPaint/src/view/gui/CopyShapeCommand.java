@@ -1,12 +1,10 @@
 package view.gui;
 
-import model.ShapeColor;
-import model.ShapeType;
-import model.persistence.ApplicationState;
+
 import view.interfaces.ICommand;
 import view.interfaces.IShape;
 
-import java.awt.*;
+
 
 public class CopyShapeCommand implements ICommand {
 

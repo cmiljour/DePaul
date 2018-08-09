@@ -22,20 +22,27 @@ public class SelectCommand implements ICommand {
 
 
 
-    public SelectCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape, ApplicationState appState) {
-        this.shapeList = shapeList;
-        this.canvas = canvas;
+    public SelectCommand(ApplicationState appState, ShapeConfiguration activeShape) {
+        //this.shapeList = shapeList;
+        //this.canvas = canvas;
         this.activeShape = activeShape;
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
-        this.pointsPressed = pointsPressed;
-        this.pointsReleased = pointsReleased;
-        this.secondList = shapeList.getShapeList();
-        this.selectedShapeList = selectedShapeList;
-        this.arraySelectedList = selectedShapeList.getShapeList();
+        //this.pointsPressed = pointsPressed;
+        //this.pointsReleased = pointsReleased;
+        //this.selectedShapeList = selectedShapeList;
+        //this.arraySelectedList = selectedShapeList.getShapeList();
         this.appState = appState;
+        this.selectedShapeList = appState.getSelectedShapeList();
+        this.shapeList = appState.getShapeList();
+        this.pointsPressed = activeShape.getActivePointsPressed();
+        this.pointsReleased = activeShape.getActivePointsReleased();
+        this.arraySelectedList = selectedShapeList.getShapeList();
+        this.canvas = appState.getCanvas();
+        this.secondList = shapeList.getShapeList();
+
     }
 
 

@@ -1,5 +1,6 @@
 package view.gui;
 
+import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
 import view.interfaces.IShape;
 
@@ -19,22 +20,30 @@ public class MoveCommand implements ICommand {
     Point pointsPressed;
     Point pointsReleased;
     ArrayList<IShape> arraySelectedList;
+    ApplicationState appState;
 
 
 
-    public MoveCommand(Point pointsPressed, Point pointsReleased, ShapeList shapeList, SelectedShapeList selectedShapeList, PaintCanvas canvas, ShapeConfiguration activeShape) {
-        this.shapeList = shapeList;
-        this.canvas = canvas;
+    public MoveCommand(ApplicationState appState, ShapeConfiguration activeShape) {
+        //this.shapeList = shapeList;
+        //this.canvas = canvas;
         this.activeShape = activeShape;
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
-        this.pointsPressed = pointsPressed;
-        this.pointsReleased = pointsReleased;
-        this.arrayList = shapeList.getShapeList();
-        this.selectedShapeList = selectedShapeList;
+        //this.pointsPressed = pointsPressed;
+        //this.pointsReleased = pointsReleased;
+        //this.arrayList = shapeList.getShapeList();
+        //this.selectedShapeList = selectedShapeList;
+        this.appState = appState;
+        this.selectedShapeList = appState.getSelectedShapeList();
+        this.shapeList = appState.getShapeList();
+        this.pointsPressed = activeShape.getActivePointsPressed();
+        this.pointsReleased = activeShape.getActivePointsReleased();
         this.arraySelectedList = selectedShapeList.getShapeList();
+        this.arrayList = shapeList.getShapeList();
+        this.canvas = appState.getCanvas();
     }
 
 
@@ -89,12 +98,12 @@ public class MoveCommand implements ICommand {
 
 
 
+        appState.getShapeListReDrawCommandHandler().handleShapeListModification();
+        //for (IShape shape : arrayList) {
 
-        for (IShape shape : arrayList) {
-
-            shape.draw();
+          //  shape.draw();
            // shapeList.printList();
-        }
+        //}
 
         //selectedShapeList.printList();
 
