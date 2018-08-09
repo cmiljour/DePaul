@@ -16,10 +16,10 @@ public class Triangle implements IShape {
     int[] yInts;
 
 
-    public Triangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape) {
+    public Triangle(int x, int y, int width, int height, ShapeConfiguration activeShape) {
 
         this.activeShape = activeShape;
-        this.graphics2d = canvas.getGraphics2D();
+        this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
         this.x = activeShape.getActivePointsPressed().getXpoint();
         this.y = activeShape.getActivePointsPressed().getYpoint();
         this.width = width;
@@ -75,10 +75,6 @@ public class Triangle implements IShape {
         return rectangle;
     }
 
-    @Override
-    public Graphics2D getGraphics2D() {
-        return null;
-    }
 
     @Override
     public void setX(int x) {

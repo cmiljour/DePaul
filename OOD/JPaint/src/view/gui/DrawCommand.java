@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class DrawCommand implements ICommand {
 
-    private PaintCanvas canvas;
+    //private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
     private int x, y, width, height;
     private ApplicationState appState;
@@ -28,7 +28,7 @@ public class DrawCommand implements ICommand {
         this.appState = appState;
 //        this.shapeListReDrawCommandHandler = appState.getShapeListReDrawCommandHandler();
         this.shapeList = appState.getShapeList();
-        this.canvas = appState.getCanvas();
+        //this.canvas = PaintCanvas.getCanvasInstance();
     }
 
 
@@ -38,21 +38,21 @@ public class DrawCommand implements ICommand {
         switch (activeShape.getActiveShapeType()) {
             case TRIANGLE:
 
-                Triangle triangle = new Triangle(x, y, width, height, canvas, activeShape);
+                Triangle triangle = new Triangle(x, y, width, height, activeShape);
                 triangle.draw();
                 shapeList.add(triangle);
                 break;
 
             case ELLIPSE:
 
-                Ellipse ellipse = new Ellipse(x, y, width, height, canvas, activeShape);
+                Ellipse ellipse = new Ellipse(x, y, width, height, activeShape);
                 ellipse.draw();
                 shapeList.add(ellipse);
                 break;
 
             case RECTANGLE:
 
-                MyRectangle rectangle = new MyRectangle(x, y, width, height, canvas, activeShape);
+                MyRectangle rectangle = new MyRectangle(x, y, width, height, activeShape);
                 rectangle.draw();
                 shapeList.add(rectangle);
                 break;

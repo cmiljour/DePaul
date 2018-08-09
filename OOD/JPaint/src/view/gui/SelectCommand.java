@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class SelectCommand implements ICommand {
     ShapeList shapeList;
     SelectedShapeList selectedShapeList;
-    PaintCanvas canvas;
+    //PaintCanvas canvas;
     ShapeConfiguration activeShape;
     private int x, y, width, height;
     Point pointsPressed;
@@ -40,7 +40,7 @@ public class SelectCommand implements ICommand {
         this.pointsPressed = activeShape.getActivePointsPressed();
         this.pointsReleased = activeShape.getActivePointsReleased();
         this.arraySelectedList = selectedShapeList.getShapeList();
-        this.canvas = appState.getCanvas();
+        //this.canvas = PaintCanvas.getCanvasInstance();
         this.secondList = shapeList.getShapeList();
 
     }

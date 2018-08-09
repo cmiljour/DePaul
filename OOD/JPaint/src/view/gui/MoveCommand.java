@@ -43,7 +43,7 @@ public class MoveCommand implements ICommand {
         this.pointsReleased = activeShape.getActivePointsReleased();
         this.arraySelectedList = selectedShapeList.getShapeList();
         this.arrayList = shapeList.getShapeList();
-        this.canvas = appState.getCanvas();
+        this.canvas = PaintCanvas.getCanvasInstance();
     }
 
 

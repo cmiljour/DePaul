@@ -7,19 +7,18 @@ import java.awt.*;
 
 public interface IShape {
     void draw ();
-    public Rectangle getRectangle();
-    public Graphics2D getGraphics2D();
+    Rectangle getRectangle();
     void setX(int x);
     void setY(int y);
-    public int getX();
-    public int getY();
-    public ShapeType getActiveShape();
-    public void setXarr(int index, int newVal);
-    public void setYarr(int index, int newVal);
-    public int getXarrIndex(int index);
-    public int getYarrIndex(int index);
-    public void setRectangle(Rectangle rectangle);
-    public int getWidth();
-    public int getHeight();
+    int getX();
+    int getY();
+    ShapeType getActiveShape();
+    void setXarr(int index, int newVal);
+    void setYarr(int index, int newVal);
+    int getXarrIndex(int index);
+    int getYarrIndex(int index);
+    void setRectangle(Rectangle rectangle);
+    int getWidth();
+    int getHeight();
     ShapeConfiguration getActiveShapeConfiguration();
 }

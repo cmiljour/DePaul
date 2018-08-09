@@ -38,10 +38,6 @@ public interface IApplicationState {
 
     void setShapeList(ShapeList shapeList);
 
-    void setCanvas(PaintCanvas canvas);
-
-    PaintCanvas getCanvas();
-
     void deleteShapes();
 
     void copyShapes();

@@ -22,14 +22,14 @@ public class MyRectangle implements IShape {
 
     Rectangle rectangle;
 
-    public MyRectangle(int x, int y, int width, int height, PaintCanvas canvas, ShapeConfiguration activeShape){
+    public MyRectangle(int x, int y, int width, int height, ShapeConfiguration activeShape){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.activeShape = activeShape;
         this.canvas = canvas;
-        this.graphics2d = canvas.getGraphics2D();
+        this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
         this.rectangle = new Rectangle(x,y,width,height);
     }
 
@@ -51,11 +51,6 @@ public class MyRectangle implements IShape {
 
     public ShapeConfiguration getActiveShapeConfiguration(){
         return this.activeShape;
-    }
-
-    @Override
-    public Graphics2D getGraphics2D() {
-        return graphics2d;
     }
 
     @Override

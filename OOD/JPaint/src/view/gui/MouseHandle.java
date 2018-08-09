@@ -27,15 +27,14 @@ public class MouseHandle extends MouseAdapter {
     ICommand command = null;
 
 
-    public MouseHandle(ApplicationState appState, PaintCanvas canvas){
+    public MouseHandle(ApplicationState appState){
         this.appState = appState;
-        this.canvas = canvas;
         this.shapeListReDrawCommandHandler = appState.getShapeListReDrawCommandHandler();
         //shapeList = new ShapeList();
         //selectedShapeList = new SelectedShapeList();
         //appState.setShapeList(shapeList);
         //appState.setSelectedShapeList(selectedShapeList);
-        appState.setCanvas(canvas);
+        //appState.setCanvas(canvas);
         //appState.setDrawShape(new DrawShape(shapeList));
         //copyShapeList = appState.getCopyShapeList();
         //shapeListReDrawCommandHandler.registerObserver(appState.getDrawShape());

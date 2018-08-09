@@ -8,7 +8,7 @@ import view.interfaces.IShape;
 
 public class CopyShapeCommand implements ICommand {
 
-    private PaintCanvas canvas;
+
     private ShapeConfiguration activeShape;
     private int x, y, width, height;
     ShapeList shapeList;
@@ -17,7 +17,7 @@ public class CopyShapeCommand implements ICommand {
 
 
 
-    public CopyShapeCommand(IShape shape, ShapeList shapeList, PaintCanvas canvas, ShapeConfiguration activeShapeConfiguration){
+    public CopyShapeCommand(IShape shape, ShapeList shapeList, ShapeConfiguration activeShapeConfiguration){
 
         this.x = 0;
         this.y = 0;
@@ -26,7 +26,7 @@ public class CopyShapeCommand implements ICommand {
         this.shape = shape;
         this.shapeList = shapeList;
         this.activeShape = activeShapeConfiguration;
-        this.canvas = canvas;
+
     }
 
 
@@ -37,7 +37,7 @@ public class CopyShapeCommand implements ICommand {
         switch (shape.getActiveShape()) {
             case TRIANGLE:
 
-                Triangle triangle = new Triangle(x, y , width, height, canvas, activeShape);
+                Triangle triangle = new Triangle(x, y , width, height, activeShape);
 
 
                 int xDiff1 = shape.getXarrIndex(1) - activeShape.getActivePointsPressed().getXpoint();
@@ -60,14 +60,14 @@ public class CopyShapeCommand implements ICommand {
 
             case ELLIPSE:
 
-                Ellipse ellipse = new Ellipse(x + 10, y + 10, width, height, canvas, activeShape);
+                Ellipse ellipse = new Ellipse(x + 10, y + 10, width, height, activeShape);
                 ellipse.draw();
                 shapeList.add(ellipse);
                 break;
 
             case RECTANGLE:
 
-                MyRectangle rectangle = new MyRectangle(x + 5, y + 5, width, height, canvas, activeShape);
+                MyRectangle rectangle = new MyRectangle(x + 5, y + 5, width, height, activeShape);
                 rectangle.draw();
                 shapeList.add(rectangle);
                 break;

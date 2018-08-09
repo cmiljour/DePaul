@@ -46,6 +46,7 @@ public class ApplicationState implements IApplicationState {
         setDefaults();
         this.shapeListReDrawCommandHandler = new ShapeListReDrawCommandHandler();
         this.drawShape = new DrawShape(shapeList);
+        this.canvas = PaintCanvas.getCanvasInstance();
         shapeListReDrawCommandHandler.registerObserver(drawShape);
     }
 
@@ -119,14 +120,6 @@ public class ApplicationState implements IApplicationState {
         this.shapeList = shapeList;
     }
 
-    public PaintCanvas getCanvas() {
-        return canvas;
-    }
-
-    public void setCanvas(PaintCanvas canvas) {
-        this.canvas = canvas;
-    }
-
     public void setCopyShapeList(CopyShapeList copyShapeList) {
         this.copyShapeList = copyShapeList;
     }
@@ -181,7 +174,7 @@ public class ApplicationState implements IApplicationState {
         ICommand command = null;
         for (IShape shape : copyShapeList.getShapeList()) {
 
-            command = new CopyShapeCommand(shape, shapeList, canvas, shape.getActiveShapeConfiguration());
+            command = new CopyShapeCommand(shape, shapeList, shape.getActiveShapeConfiguration());
 
 
 //            if (shape.getActiveShape() == TRIANGLE) {
