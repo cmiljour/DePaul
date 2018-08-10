@@ -1,11 +1,8 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
-import view.gui.DrawCommand;
-import view.gui.MoveCommand;
-import view.gui.SelectCommand;
-import view.gui.ShapeConfiguration;
 import view.interfaces.ICommand;
+
 
 public class ICommandFactory {
 
@@ -19,7 +16,9 @@ public class ICommandFactory {
             return new SelectCommand(appState, activeShape);
 
         } else if (commandType.equalsIgnoreCase("DRAW")) {
-            return new DrawCommand(appState, activeShape);
+            DrawCommand drawCommand = new DrawCommand(appState,activeShape);
+            CommandHistory.add(drawCommand);
+            return drawCommand;
 
         } else if (commandType.equalsIgnoreCase("MOVE")) {
             return new MoveCommand(appState, activeShape);

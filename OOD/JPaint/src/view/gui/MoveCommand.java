@@ -3,13 +3,14 @@ package view.gui;
 import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
 import view.interfaces.IShape;
+import view.interfaces.IUndoable;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 import static model.ShapeType.TRIANGLE;
 
-public class MoveCommand implements ICommand {
+public class MoveCommand implements ICommand, IUndoable {
 
     ShapeList shapeList;
     ArrayList<IShape> arrayList;
@@ -20,6 +21,7 @@ public class MoveCommand implements ICommand {
     Point pointsReleased;
     ArrayList<IShape> arraySelectedList;
     ApplicationState appState;
+    Graphics2D graphics2D;
 
     public MoveCommand(ApplicationState appState, ShapeConfiguration activeShape) {
         this.activeShape = activeShape;
@@ -30,7 +32,7 @@ public class MoveCommand implements ICommand {
         this.pointsReleased = activeShape.getActivePointsReleased();
         this.arraySelectedList = selectedShapeList.getShapeList();
         this.arrayList = shapeList.getShapeList();
-        this.canvas = PaintCanvas.getCanvasInstance();
+        this.graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
     }
 
     @Override
@@ -45,7 +47,6 @@ public class MoveCommand implements ICommand {
         int xDiff2;
         int yDiff2;
 
-        Graphics2D graphics2D = canvas.getGraphics2D();
 
         for (IShape shape : arraySelectedList)
             if (shape.getActiveShape() == TRIANGLE) {
@@ -79,5 +80,15 @@ public class MoveCommand implements ICommand {
         graphics2D.fillRect(0,0,100000,100000);
 
         appState.getShapeListReDrawCommandHandler().handleShapeListModification();
+    }
+
+    @Override
+    public void undo() {
+        
+    }
+
+    @Override
+    public void redo() {
+
     }
 }

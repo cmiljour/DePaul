@@ -4,7 +4,7 @@ import view.interfaces.IUndoable;
 
 import java.util.Stack;
 
-class CommandHistory {
+public class CommandHistory {
 	private static final Stack<IUndoable> undoStack = new Stack<IUndoable>();
 	private static final Stack<IUndoable> redoStack = new Stack<IUndoable>();
 
@@ -19,6 +19,7 @@ class CommandHistory {
 			IUndoable c = undoStack.pop();
 			redoStack.push(c);
 			c.undo();
+			System.out.println("undo command is working");
 		}
 		return result;
 	}

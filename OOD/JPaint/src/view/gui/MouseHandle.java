@@ -2,7 +2,6 @@ package view.gui;
 
 import model.persistence.ApplicationState;
 import view.interfaces.ICommand;
-import view.interfaces.ICommandFactory;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

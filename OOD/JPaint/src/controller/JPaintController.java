@@ -3,6 +3,7 @@ package controller;
 import model.interfaces.IApplicationState;
 import view.EventName;
 
+import view.gui.CommandHistory;
 import view.gui.PaintCanvas;
 
 import view.interfaces.IShape;
@@ -34,7 +35,7 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.COPY, () -> applicationState.copyShapes());
         uiModule.addEvent(EventName.PASTE, () -> applicationState.pasteShapes());
         uiModule.addEvent(EventName.DELETE, () -> applicationState.deleteShapes());
-        uiModule.addEvent(EventName.REDO, () -> System.out.println("redo button worked"));
-        uiModule.addEvent(EventName.UNDO, () -> System.out.println("undo button worked"));
+        uiModule.addEvent(EventName.REDO, () -> CommandHistory.redo());
+        uiModule.addEvent(EventName.UNDO, () -> CommandHistory.undo());
     }
 }

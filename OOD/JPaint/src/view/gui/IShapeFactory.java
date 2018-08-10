@@ -1,9 +1,10 @@
-package view.interfaces;
+package view.gui;
 
 import view.gui.Ellipse;
 import view.gui.MyRectangle;
 import view.gui.ShapeConfiguration;
 import view.gui.Triangle;
+import view.interfaces.IShape;
 
 public class IShapeFactory {
 
