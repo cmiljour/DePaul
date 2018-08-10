@@ -128,84 +128,35 @@ public class ApplicationState implements IApplicationState {
         return shapeListReDrawCommandHandler;
     }
 
-    public DrawShape getDrawShape() {
-        return drawShape;
-    }
-
-    public void setDrawShape(DrawShape drawShape) {
-        this.drawShape = drawShape;
-    }
-
     public void deleteShapes(){
-       // ArrayList<IShape> selectedArrayShapeList = getSelectedShapeList().getShapeList();
-        //ArrayList<IShape> shapeArrayList = getShapeList().getShapeList();
 
         for (IShape shape : getSelectedShapeList().getShapeList()){
             shapeList.remove(shape);
         }
 
         getSelectedShapeList().getShapeList().clear();
-
-
         Graphics2D graphics2D = canvas.getGraphics2D();
         graphics2D.clearRect(0,0,10000,10000);
 
-        for (IShape shape : getShapeList().getShapeList()) {
-            shape.draw();
-        }
+        getShapeListReDrawCommandHandler().handleShapeListModification();
     }
 
     @Override
     public void copyShapes() {
-       // ArrayList<IShape> selectedArrayShapeList = getSelectedShapeList().getShapeList();
 
         for (IShape shape : getSelectedShapeList().getShapeList()){
-
-
             copyShapeList.add(shape);
-
-
         }
     }
 
     @Override
     public void pasteShapes() {
-       // ArrayList<IShape> copyArrayShapeList = copyShapeList.getShapeList();
+
         ICommand command = null;
         for (IShape shape : copyShapeList.getShapeList()) {
 
             command = new CopyShapeCommand(shape, shapeList, shape.getActiveShapeConfiguration());
 
-
-//            if (shape.getActiveShape() == TRIANGLE) {
-//                int x0diffX1 = shape.getXarrIndex(1) - shape.getXarrIndex(0);
-//                int y0diffY1 = shape.getYarrIndex(1) - shape.getYarrIndex(0);
-//
-//                shape.setXarr(0, 0);
-//                shape.setXarr(1, x0diffX1);
-//                shape.setXarr(2, 0);
-//
-//                shape.setYarr(0, 0);
-//                shape.setYarr(1, y0diffY1);
-//                shape.setYarr(2, y0diffY1);
-//
-//                shape.draw();
-//
-//                shapeList.add(shape);
-//
-//                shape.setRectangle(new Rectangle (0, 0, shape.getWidth(), shape.getHeight() ));
-//
-//            } else {
-//                shapeList.add(shape);
-//                shape.setX(0);
-//                shape.setY(0);
-//
-//                shape.setRectangle(new Rectangle (0, 0, shape.getWidth(), shape.getHeight() ));
-//
-//                shape.draw();
-//
-//            }
-            //copyShapeList.printList();
             try {
                 command.run();
             } catch (IOException e) {
@@ -213,11 +164,7 @@ public class ApplicationState implements IApplicationState {
             }
         }
 
-        for (IShape shape : shapeList.getShapeList()) {
-
-            shape.draw();
-            // shapeList.printList();
-        }
+        getShapeListReDrawCommandHandler().handleShapeListModification();
 
     }
     private void setDefaults() {

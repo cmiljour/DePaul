@@ -16,15 +16,19 @@ public class Ellipse implements IShape {
     Ellipse2D.Double ellipse;
     Rectangle rectangle;
 
-    public Ellipse(int x, int y, int width, int height, ShapeConfiguration activeShape){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public Ellipse(ShapeConfiguration activeShape){
+//        this.x = x;
+//        this.y = y;
+//        this.width = width;
+//        this.height = height;
+        this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
+        this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
+        this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
+        this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.activeShape = activeShape;
         this.canvas = canvas;
         this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
-        rectangle = new Rectangle(x,y,width,height);
+        rectangle = new Rectangle(this.x,this.y,this.width,this.height);
     }
     @Override
     public void draw() {

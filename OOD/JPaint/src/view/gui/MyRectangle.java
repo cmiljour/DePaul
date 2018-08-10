@@ -13,24 +13,25 @@ public class MyRectangle implements IShape {
     private int y;
     private int width;
     private int height;
-    Color color;
     Graphics2D graphics2d;
-    private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
 
 
 
     Rectangle rectangle;
 
-    public MyRectangle(int x, int y, int width, int height, ShapeConfiguration activeShape){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public MyRectangle(ShapeConfiguration activeShape){
+//        this.x = x;
+//        this.y = y;
+//        this.width = width;
+//        this.height = height;
+        this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
+        this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
+        this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
+        this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.activeShape = activeShape;
-        this.canvas = canvas;
         this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
-        this.rectangle = new Rectangle(x,y,width,height);
+        this.rectangle = new Rectangle(this.x,this.y,this.width,this.height);
     }
 
     public Rectangle getRectangle() {

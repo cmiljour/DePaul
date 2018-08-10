@@ -16,26 +16,13 @@ public class MoveCommand implements ICommand {
     SelectedShapeList selectedShapeList;
     PaintCanvas canvas;
     ShapeConfiguration activeShape;
-    private int x, y, width, height;
     Point pointsPressed;
     Point pointsReleased;
     ArrayList<IShape> arraySelectedList;
     ApplicationState appState;
 
-
-
     public MoveCommand(ApplicationState appState, ShapeConfiguration activeShape) {
-        //this.shapeList = shapeList;
-        //this.canvas = canvas;
         this.activeShape = activeShape;
-        this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
-        this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
-        this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
-        this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
-        //this.pointsPressed = pointsPressed;
-        //this.pointsReleased = pointsReleased;
-        //this.arrayList = shapeList.getShapeList();
-        //this.selectedShapeList = selectedShapeList;
         this.appState = appState;
         this.selectedShapeList = appState.getSelectedShapeList();
         this.shapeList = appState.getShapeList();
@@ -45,7 +32,6 @@ public class MoveCommand implements ICommand {
         this.arrayList = shapeList.getShapeList();
         this.canvas = PaintCanvas.getCanvasInstance();
     }
-
 
     @Override
     public void run() {
@@ -61,8 +47,6 @@ public class MoveCommand implements ICommand {
 
         Graphics2D graphics2D = canvas.getGraphics2D();
 
-
-        //selectedShapeList.printList();
         for (IShape shape : arraySelectedList)
             if (shape.getActiveShape() == TRIANGLE) {
                 xDiff0 = shape.getXarrIndex(0) - pointsPressed.getXpoint();
@@ -81,7 +65,6 @@ public class MoveCommand implements ICommand {
 
                 shape.setRectangle(new Rectangle (pointsReleased.getXpoint() + xDiff0,  pointsReleased.getYpoint() + yDiff0, shape.getWidth(), shape.getHeight() ));
 
-
             } else {
 
                 xDiff = shape.getX() - pointsPressed.getXpoint();
@@ -92,20 +75,9 @@ public class MoveCommand implements ICommand {
 
             }
 
-
         graphics2D.setColor(Color.white);
         graphics2D.fillRect(0,0,100000,100000);
 
-
-
         appState.getShapeListReDrawCommandHandler().handleShapeListModification();
-        //for (IShape shape : arrayList) {
-
-          //  shape.draw();
-           // shapeList.printList();
-        //}
-
-        //selectedShapeList.printList();
-
     }
 }
