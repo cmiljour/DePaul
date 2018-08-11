@@ -20,10 +20,6 @@ public class Triangle implements IShape {
 
         this.activeShape = activeShape;
         this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
-//        this.x = activeShape.getActivePointsPressed().getXpoint();
-//        this.y = activeShape.getActivePointsPressed().getYpoint();
-//        this.width = width;
-//        this.height = height;
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());

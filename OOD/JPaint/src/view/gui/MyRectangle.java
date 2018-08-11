@@ -7,7 +7,7 @@ import java.awt.*;
 
 import static model.ShapeType.RECTANGLE;
 
-public class MyRectangle implements IShape {
+public class MyRectangle implements IShape, Cloneable {
 
     private int x;
     private int y;
@@ -21,10 +21,7 @@ public class MyRectangle implements IShape {
     Rectangle rectangle;
 
     public MyRectangle(ShapeConfiguration activeShape){
-//        this.x = x;
-//        this.y = y;
-//        this.width = width;
-//        this.height = height;
+
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());

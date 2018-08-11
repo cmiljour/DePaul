@@ -21,6 +21,8 @@ public class ICommandFactory {
             return drawCommand;
 
         } else if (commandType.equalsIgnoreCase("MOVE")) {
+            MoveCommand moveCommand = new MoveCommand(appState, activeShape);
+            CommandHistory.add(moveCommand);
             return new MoveCommand(appState, activeShape);
         }
 

@@ -11,41 +11,45 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteShapeCommand implements ICommand, IUndoable {
-    IApplicationState appState;
+    ShapeList shapeList;
+    SelectedShapeList selectedShapeList;
     ArrayList<IShape> cloneShapeArrayList;
+    ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
 
-    public DeleteShapeCommand(IApplicationState appState){
-        this.appState = appState;
+    public DeleteShapeCommand(ShapeList shapeList, SelectedShapeList selectedShapeList,
+                              ShapeListReDrawCommandHandler shapeListReDrawCommandHandler){
+        this.selectedShapeList = selectedShapeList;
+        this.shapeList = shapeList;
         this.cloneShapeArrayList = new ArrayList<>();
+        this.shapeListReDrawCommandHandler = shapeListReDrawCommandHandler;
     }
 
     @Override
-    public void run() throws IOException {
-        for(IShape shape : appState.getSelectedShapeList().getShapeList()){
+    public void run(){
+        for(IShape shape : shapeList.getShapeList()){
             cloneShapeArrayList.add(shape);
         }
 
-        for (IShape shape : appState.getSelectedShapeList().getShapeList() ){
-            appState.getShapeList().remove(shape);
+        for (IShape shape : selectedShapeList.getShapeList() ){
+            shapeList.getShapeList().remove(shape);
         }
 
-        appState.getSelectedShapeList().getShapeList().clear();
+        selectedShapeList.getShapeList().clear();
         Graphics2D graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
         graphics2D.clearRect(0,0,10000,10000);
-        appState.getShapeListReDrawCommandHandler().handleShapeListModification();
+        shapeListReDrawCommandHandler.handleShapeListModification();
     }
 
     @Override
     public void undo() {
         Graphics2D graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
         graphics2D.clearRect(0,0,10000,10000);
-        appState.getShapeList().getShapeList().clear();
+        shapeList.getShapeList().clear();
 
         for (IShape shape : cloneShapeArrayList){
-            appState.getShapeList().add(shape);
-            shape.draw();
+            shapeList.getShapeList().add(shape);
         }
-
+        shapeListReDrawCommandHandler.handleShapeListModification();
     }
 
     @Override

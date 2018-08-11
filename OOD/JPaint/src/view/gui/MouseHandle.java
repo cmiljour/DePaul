@@ -40,11 +40,7 @@ public class MouseHandle extends MouseAdapter {
         activeShape.setActivePointsReleased(pointsReleased);
         commandType = appState.getActiveStartAndEndPointMode().toString();
         command = ICommandFactory.getCommandType(commandType,appState,activeShape);
-        try {
-            command.run();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+        command.run();
 
 
     }

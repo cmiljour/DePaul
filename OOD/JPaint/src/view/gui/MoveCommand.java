@@ -7,6 +7,7 @@ import view.interfaces.IUndoable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static model.ShapeType.TRIANGLE;
 
@@ -22,6 +23,9 @@ public class MoveCommand implements ICommand, IUndoable {
     ArrayList<IShape> arraySelectedList;
     ApplicationState appState;
     Graphics2D graphics2D;
+    ArrayList<IShape> cloneShapeArrayList;
+    private int width;
+    private int height;
 
     public MoveCommand(ApplicationState appState, ShapeConfiguration activeShape) {
         this.activeShape = activeShape;
@@ -33,6 +37,9 @@ public class MoveCommand implements ICommand, IUndoable {
         this.arraySelectedList = selectedShapeList.getShapeList();
         this.arrayList = shapeList.getShapeList();
         this.graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
+        this.cloneShapeArrayList = new ArrayList<IShape>();
+        this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
+        this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
     }
 
     @Override
@@ -46,7 +53,6 @@ public class MoveCommand implements ICommand, IUndoable {
         int yDiff1;
         int xDiff2;
         int yDiff2;
-
 
         for (IShape shape : arraySelectedList)
             if (shape.getActiveShape() == TRIANGLE) {
@@ -68,12 +74,24 @@ public class MoveCommand implements ICommand, IUndoable {
 
             } else {
 
-                xDiff = shape.getX() - pointsPressed.getXpoint();
-                yDiff = shape.getY() - pointsPressed.getYpoint();
-                shape.setX(pointsReleased.getXpoint() + xDiff);
-                shape.setY(pointsReleased.getYpoint() + yDiff);
-                shape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
+                IShape newShape = IShapeFactory.getShape(shape.getActiveShape().toString(), shape.getActiveShapeConfiguration());
 
+                shapeList.remove(shape);
+
+//                xDiff = shape.getX() - pointsReleased.getXpoint();
+//                yDiff = shape.getY() - pointsReleased.getYpoint();
+//                newShape.setX(pointsReleased.getXpoint() + xDiff);
+//                newShape.setY(pointsReleased.getYpoint() + yDiff);
+//                newShape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, newShape.getWidth(), newShape.getHeight() ));
+//                shapeList.add(newShape);
+
+
+                xDiff = newShape.getX() - pointsPressed.getXpoint();
+                yDiff = newShape.getY() - pointsPressed.getYpoint();
+                newShape.setX(pointsReleased.getXpoint() + xDiff);
+                newShape.setY(pointsReleased.getYpoint() + yDiff);
+                newShape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
+                shapeList.add(newShape);
             }
 
         graphics2D.setColor(Color.white);
@@ -84,6 +102,21 @@ public class MoveCommand implements ICommand, IUndoable {
 
     @Override
     public void undo() {
+
+        Graphics2D graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
+        graphics2D.clearRect(0,0,10000,10000);
+        shapeList.getShapeList().clear();
+
+
+
+        for (IShape shape : cloneShapeArrayList){
+            System.out.println(shape);
+            shapeList.getShapeList().add(shape);
+        }
+
+
+        appState.getShapeListReDrawCommandHandler().handleShapeListModification();
+
         
     }
 

@@ -130,6 +130,10 @@ public class ApplicationState implements IApplicationState {
 
     public void deleteShapes(){
 
+        DeleteShapeCommand deleteShapeCommand = new DeleteShapeCommand(shapeList, selectedShapeList,getShapeListReDrawCommandHandler());
+        CommandHistory.add(deleteShapeCommand);
+        deleteShapeCommand.run();
+
 //        for (IShape shape : getSelectedShapeList().getShapeList()){
 //            shapeList.remove(shape);
 //        }
