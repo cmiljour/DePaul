@@ -4,10 +4,7 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 import model.StartAndEndPointMode;
-import view.gui.CopyShapeList;
-import view.gui.PaintCanvas;
-import view.gui.SelectedShapeList;
-import view.gui.ShapeList;
+import view.gui.*;
 
 public interface IApplicationState {
     void setActiveShape();
@@ -47,4 +44,6 @@ public interface IApplicationState {
     CopyShapeList getCopyShapeList();
 
     void pasteShapes();
+
+    ShapeListReDrawCommandHandler getShapeListReDrawCommandHandler();
 }

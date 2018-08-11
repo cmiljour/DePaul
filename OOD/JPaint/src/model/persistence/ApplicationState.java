@@ -130,20 +130,19 @@ public class ApplicationState implements IApplicationState {
 
     public void deleteShapes(){
 
-        for (IShape shape : getSelectedShapeList().getShapeList()){
-            shapeList.remove(shape);
-        }
-
-        getSelectedShapeList().getShapeList().clear();
-        Graphics2D graphics2D = canvas.getGraphics2D();
-        graphics2D.clearRect(0,0,10000,10000);
-
-        getShapeListReDrawCommandHandler().handleShapeListModification();
+//        for (IShape shape : getSelectedShapeList().getShapeList()){
+//            shapeList.remove(shape);
+//        }
+//
+//        getSelectedShapeList().getShapeList().clear();
+//        Graphics2D graphics2D = canvas.getGraphics2D();
+//        graphics2D.clearRect(0,0,10000,10000);
+//
+//        getShapeListReDrawCommandHandler().handleShapeListModification();
     }
 
     @Override
     public void copyShapes() {
-
         for (IShape shape : getSelectedShapeList().getShapeList()){
             copyShapeList.add(shape);
         }
@@ -152,16 +151,13 @@ public class ApplicationState implements IApplicationState {
     @Override
     public void pasteShapes() {
 
-        ICommand command = null;
+        CopyShapeCommand command = null;
         for (IShape shape : copyShapeList.getShapeList()) {
 
             command = new CopyShapeCommand(shape, shapeList, shape.getActiveShapeConfiguration());
+            CommandHistory.add(command);
+            command.run();
 
-            try {
-                command.run();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         getShapeListReDrawCommandHandler().handleShapeListModification();
