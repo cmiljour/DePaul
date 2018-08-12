@@ -26,6 +26,7 @@ public class MoveCommand implements ICommand, IUndoable {
     ArrayList<IShape> cloneShapeArrayList;
     private int width;
     private int height;
+    IShape newShape;
 
     public MoveCommand(ApplicationState appState, ShapeConfiguration activeShape) {
         this.activeShape = activeShape;
@@ -37,7 +38,7 @@ public class MoveCommand implements ICommand, IUndoable {
         this.arraySelectedList = selectedShapeList.getShapeList();
         this.arrayList = shapeList.getShapeList();
         this.graphics2D = PaintCanvas.getCanvasInstance().getGraphics2D();
-        this.cloneShapeArrayList = new ArrayList<IShape>();
+        this.cloneShapeArrayList = appState.getClonedShapeArrayList();
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
     }
@@ -53,6 +54,17 @@ public class MoveCommand implements ICommand, IUndoable {
         int yDiff1;
         int xDiff2;
         int yDiff2;
+
+        for (IShape shape : shapeList.getShapeList()){
+            IShape newShape = IShapeFactory.getShape(shape.getActiveShape().toString(), shape.getActiveShapeConfiguration());
+
+            if(!(cloneShapeArrayList.contains(shape))){
+                cloneShapeArrayList.add(newShape);
+            }
+        }
+
+        System.out.println("cloneshapedarray list before undo printout");
+        System.out.println(cloneShapeArrayList.toString());
 
         for (IShape shape : arraySelectedList)
             if (shape.getActiveShape() == TRIANGLE) {
@@ -74,24 +86,24 @@ public class MoveCommand implements ICommand, IUndoable {
 
             } else {
 
-                IShape newShape = IShapeFactory.getShape(shape.getActiveShape().toString(), shape.getActiveShapeConfiguration());
+               // IShape newShape = IShapeFactory.getShape(shape.getActiveShape().toString(), shape.getActiveShapeConfiguration());
+                //shapeList.remove(shape);
 
-                shapeList.remove(shape);
+                xDiff = shape.getX() - pointsPressed.getXpoint();
+                yDiff = shape.getY() - pointsPressed.getYpoint();
+                shape.setX(pointsReleased.getXpoint() + xDiff);
+                shape.setY(pointsReleased.getYpoint() + yDiff);
+                shape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
+                //shapeList.add(shape);
 
-//                xDiff = shape.getX() - pointsReleased.getXpoint();
-//                yDiff = shape.getY() - pointsReleased.getYpoint();
+//
+//                xDiff = newShape.getX() - pointsPressed.getXpoint();
+//                yDiff = newShape.getY() - pointsPressed.getYpoint();
 //                newShape.setX(pointsReleased.getXpoint() + xDiff);
 //                newShape.setY(pointsReleased.getYpoint() + yDiff);
-//                newShape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, newShape.getWidth(), newShape.getHeight() ));
+//                newShape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
 //                shapeList.add(newShape);
-
-
-                xDiff = newShape.getX() - pointsPressed.getXpoint();
-                yDiff = newShape.getY() - pointsPressed.getYpoint();
-                newShape.setX(pointsReleased.getXpoint() + xDiff);
-                newShape.setY(pointsReleased.getYpoint() + yDiff);
-                newShape.setRectangle(new Rectangle(pointsReleased.getXpoint() + xDiff, pointsReleased.getYpoint() + yDiff, shape.getWidth(), shape.getHeight() ));
-                shapeList.add(newShape);
+//                cloneShapeArrayList.add(newShape);
             }
 
         graphics2D.setColor(Color.white);
@@ -107,12 +119,11 @@ public class MoveCommand implements ICommand, IUndoable {
         graphics2D.clearRect(0,0,10000,10000);
         shapeList.getShapeList().clear();
 
-
-
         for (IShape shape : cloneShapeArrayList){
-            System.out.println(shape);
-            shapeList.getShapeList().add(shape);
+            shapeList.add(shape);
         }
+
+        cloneShapeArrayList.clear();
 
 
         appState.getShapeListReDrawCommandHandler().handleShapeListModification();

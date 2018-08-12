@@ -29,6 +29,7 @@ public class ApplicationState implements IApplicationState {
     private SelectedShapeList selectedShapeList;
     private ShapeList shapeList;
     private PaintCanvas canvas;
+    private ArrayList<IShape> clonedShapeArrayList;
     ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
 
     DrawShape drawShape;
@@ -47,6 +48,7 @@ public class ApplicationState implements IApplicationState {
         this.shapeListReDrawCommandHandler = new ShapeListReDrawCommandHandler();
         this.drawShape = new DrawShape(shapeList);
         this.canvas = PaintCanvas.getCanvasInstance();
+        this.clonedShapeArrayList = new ArrayList<>();
         shapeListReDrawCommandHandler.registerObserver(drawShape);
     }
 
@@ -127,6 +129,11 @@ public class ApplicationState implements IApplicationState {
     public ShapeListReDrawCommandHandler getShapeListReDrawCommandHandler() {
         return shapeListReDrawCommandHandler;
     }
+
+    public ArrayList<IShape> getClonedShapeArrayList() {
+        return clonedShapeArrayList;
+    }
+
 
     public void deleteShapes(){
 
