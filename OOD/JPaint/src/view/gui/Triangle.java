@@ -17,7 +17,6 @@ public class Triangle implements IShape {
 
 
     public Triangle(ShapeConfiguration activeShape) {
-
         this.activeShape = activeShape;
         this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
@@ -29,7 +28,6 @@ public class Triangle implements IShape {
                 activeShape.getActivePointsPressed().getXpoint(),
                 activeShape.getActivePointsReleased().getXpoint(),
                 activeShape.getActivePointsPressed().getXpoint()};
-
         this.yInts = new int[]{
                 activeShape.getActivePointsPressed().getYpoint(),
                 activeShape.getActivePointsReleased().getYpoint(),
@@ -38,18 +36,15 @@ public class Triangle implements IShape {
 
     @Override
     public void draw() {
-
         switch (activeShape.getActiveShapeShadingType()) {
 
             case FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.fillPolygon(xInts, yInts, 3);
 
                 break;
 
             case OUTLINE:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.setStroke(new BasicStroke(5));
                 graphics2d.drawPolygon(xInts, yInts, 3);
@@ -57,7 +52,6 @@ public class Triangle implements IShape {
                 break;
 
             case OUTLINE_AND_FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.fillPolygon(xInts, yInts, 3);
                 graphics2d.setStroke(new BasicStroke(5));
@@ -66,8 +60,6 @@ public class Triangle implements IShape {
 
                 break;
         }
-
-
     }
 
     @Override
@@ -79,7 +71,6 @@ public class Triangle implements IShape {
     @Override
     public void setX(int x) {
         this.x = x;
-
     }
 
     @Override
@@ -141,6 +132,4 @@ public class Triangle implements IShape {
     public ShapeConfiguration getActiveShapeConfiguration() {
         return this.activeShape;
     }
-
-
 }

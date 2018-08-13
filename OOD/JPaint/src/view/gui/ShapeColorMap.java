@@ -10,8 +10,6 @@ public final class ShapeColorMap {
             = new EnumMap<ShapeColor,Color>(ShapeColor.class);
 
     static {
-
-
         colorMap.put(ShapeColor.BLACK,Color.BLACK);
         colorMap.put(ShapeColor.BLUE,Color.BLUE);
         colorMap.put(ShapeColor.CYAN,Color.CYAN);
@@ -25,18 +23,11 @@ public final class ShapeColorMap {
         colorMap.put(ShapeColor.RED,Color.RED);
         colorMap.put(ShapeColor.WHITE,Color.WHITE);
         colorMap.put(ShapeColor.YELLOW,Color.YELLOW);
-
-
     }
 
     private ShapeColorMap() { }
 
     public static Color get(ShapeColor enumColor) {
-
-
         return colorMap.get(enumColor);
-
-
     }
-
 }

@@ -2,14 +2,11 @@ package view.gui;
 
 import model.ShapeType;
 import view.interfaces.IShape;
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Ellipse implements IShape {
-
     private int x, y, width, height;
-    Color Color;
     Graphics2D graphics2d;
     private PaintCanvas canvas;
     private ShapeConfiguration activeShape;
@@ -17,16 +14,11 @@ public class Ellipse implements IShape {
     Rectangle rectangle;
 
     public Ellipse(ShapeConfiguration activeShape){
-//        this.x = x;
-//        this.y = y;
-//        this.width = width;
-//        this.height = height;
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
         this.height = Math.abs(activeShape.getActivePointsPressed().getYpoint() - activeShape.getActivePointsReleased().getYpoint());
         this.activeShape = activeShape;
-        this.canvas = canvas;
         this.graphics2d = PaintCanvas.getCanvasInstance().getGraphics2D();
         rectangle = new Rectangle(this.x,this.y,this.width,this.height);
     }
@@ -35,7 +27,6 @@ public class Ellipse implements IShape {
 
         switch (activeShape.getActiveShapeShadingType()) {
             case FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 ellipse = new Ellipse2D.Double(x,y,width,height);
                 graphics2d.fill(ellipse);
@@ -44,7 +35,6 @@ public class Ellipse implements IShape {
                 break;
 
             case OUTLINE:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 ellipse = new Ellipse2D.Double(x,y,width,height);
                 graphics2d.setStroke(new BasicStroke(5));
@@ -53,7 +43,6 @@ public class Ellipse implements IShape {
                 break;
 
             case OUTLINE_AND_FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 ellipse = new Ellipse2D.Double(x,y,width,height);
                 graphics2d.fill(ellipse);
@@ -97,12 +86,10 @@ public class Ellipse implements IShape {
 
     @Override
     public void setXarr(int index, int newVal) {
-
     }
 
     @Override
     public void setYarr(int index, int newVal) {
-
     }
 
     @Override

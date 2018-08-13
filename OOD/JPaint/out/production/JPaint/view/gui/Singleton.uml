@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="296.0">view.gui.Triangle</node>
+    <node x="0.0" y="74.0">view.gui.DrawCommand</node>
+    <node x="141.0" y="296.0">view.gui.Ellipse</node>
+    <node x="0.0" y="222.0">view.gui.MyRectangle</node>
+    <node x="170.0" y="222.0">view.gui.PaintCanvas</node>
+    <node x="0.0" y="0.0">model.persistence.ApplicationState</node>
+    <node x="0.0" y="148.0">view.gui.MoveCommand</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <SelectedNodes>
+    <node>model.persistence.ApplicationState</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

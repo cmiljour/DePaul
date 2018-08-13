@@ -27,23 +27,9 @@ public interface IApplicationState {
 
     StartAndEndPointMode getActiveStartAndEndPointMode();
 
-    void setSelectedShapeList(SelectedShapeList selectedShapeList);
-
     SelectedShapeList getSelectedShapeList();
 
     ShapeList getShapeList();
-
-    void setShapeList(ShapeList shapeList);
-
-    void deleteShapes();
-
-    void copyShapes();
-
-    void setCopyShapeList(CopyShapeList copyShapeList);
-
-    CopyShapeList getCopyShapeList();
-
-    void pasteShapes();
 
     ShapeListReDrawCommandHandler getShapeListReDrawCommandHandler();
 }

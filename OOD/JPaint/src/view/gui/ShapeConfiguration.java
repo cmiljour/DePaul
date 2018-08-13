@@ -39,27 +39,11 @@ public class ShapeConfiguration {
 
     public ShapeShadingType getActiveShapeShadingType() { return activeShapeShadingType; }
 
-    public void setShapeType(ShapeType activeShapeType){
-        this.activeShapeType = activeShapeType;
-    }
-
-    public void setPrimaryShapeColor(ShapeColor activePrimaryColor){
-        this.activePrimaryColor = activePrimaryColor;
-    }
-
-    public void setSetSecondaryShapeColor(ShapeColor activeSecondaryColor){
-        this.activeSecondaryColor = activeSecondaryColor;
-    }
-
     public void setActivePointsPressed(Point activePointsPressed) {
         this.activePointsPressed = activePointsPressed;
     }
 
     public void setActivePointsReleased(Point activePointsReleased) {
         this.activePointsReleased = activePointsReleased;
-    }
-
-    public void setActiveShapeShadingType(ShapeShadingType activeShapeShadingType) {
-        this.activeShapeShadingType = activeShapeShadingType;
     }
 }

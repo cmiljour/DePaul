@@ -30,11 +30,8 @@ public class ApplicationState implements IApplicationState {
     private ShapeList shapeList;
     private PaintCanvas canvas;
     private ArrayList<IShape> clonedShapeArrayList;
-    ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
-
-    DrawShape drawShape;
-
-
+    private ShapeListReDrawCommandHandler shapeListReDrawCommandHandler;
+    private DrawShape drawShape;
     private CopyShapeList copyShapeList;
 
 
@@ -44,12 +41,12 @@ public class ApplicationState implements IApplicationState {
         this.shapeList = new ShapeList();
         this.selectedShapeList = new SelectedShapeList();
         this.copyShapeList = new CopyShapeList();
-        setDefaults();
         this.shapeListReDrawCommandHandler = new ShapeListReDrawCommandHandler();
         this.drawShape = new DrawShape(shapeList);
         this.canvas = PaintCanvas.getCanvasInstance();
         this.clonedShapeArrayList = new ArrayList<>();
-        shapeListReDrawCommandHandler.registerObserver(drawShape);
+        this.shapeListReDrawCommandHandler.registerObserver(drawShape);
+        setDefaults();
     }
 
     @Override
@@ -110,20 +107,8 @@ public class ApplicationState implements IApplicationState {
         return selectedShapeList;
     }
 
-    public void setSelectedShapeList(SelectedShapeList selectedShapeList) {
-        this.selectedShapeList = selectedShapeList;
-    }
-
     public ShapeList getShapeList() {
         return shapeList;
-    }
-
-    public void setShapeList(ShapeList shapeList) {
-        this.shapeList = shapeList;
-    }
-
-    public void setCopyShapeList(CopyShapeList copyShapeList) {
-        this.copyShapeList = copyShapeList;
     }
 
     public ShapeListReDrawCommandHandler getShapeListReDrawCommandHandler() {
@@ -134,46 +119,10 @@ public class ApplicationState implements IApplicationState {
         return clonedShapeArrayList;
     }
 
-
-    public void deleteShapes(){
-
-        DeleteShapeCommand deleteShapeCommand = new DeleteShapeCommand(shapeList, selectedShapeList,getShapeListReDrawCommandHandler());
-        CommandHistory.add(deleteShapeCommand);
-        deleteShapeCommand.run();
-
-//        for (IShape shape : getSelectedShapeList().getShapeList()){
-//            shapeList.remove(shape);
-//        }
-//
-//        getSelectedShapeList().getShapeList().clear();
-//        Graphics2D graphics2D = canvas.getGraphics2D();
-//        graphics2D.clearRect(0,0,10000,10000);
-//
-//        getShapeListReDrawCommandHandler().handleShapeListModification();
+    public CopyShapeList getCopyShapeList() {
+        return copyShapeList;
     }
 
-    @Override
-    public void copyShapes() {
-        for (IShape shape : getSelectedShapeList().getShapeList()){
-            copyShapeList.add(shape);
-        }
-    }
-
-    @Override
-    public void pasteShapes() {
-
-        CopyShapeCommand command = null;
-        for (IShape shape : copyShapeList.getShapeList()) {
-
-            command = new CopyShapeCommand(shape, shapeList, shape.getActiveShapeConfiguration());
-            CommandHistory.add(command);
-            command.run();
-
-        }
-
-        getShapeListReDrawCommandHandler().handleShapeListModification();
-
-    }
     private void setDefaults() {
         activeShapeType = ShapeType.RECTANGLE;
         activePrimaryColor = ShapeColor.BLUE;
@@ -181,10 +130,5 @@ public class ApplicationState implements IApplicationState {
         activeShapeShadingType = ShapeShadingType.FILLED_IN;
         activeStartAndEndPointMode = StartAndEndPointMode.DRAW;
     }
-
-    public CopyShapeList getCopyShapeList() {
-        return this.copyShapeList;
-    }
-
 
 }

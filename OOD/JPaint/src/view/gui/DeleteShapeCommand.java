@@ -1,13 +1,10 @@
 package view.gui;
 
-import model.interfaces.IApplicationState;
-import model.persistence.ApplicationState;
+
 import view.interfaces.ICommand;
 import view.interfaces.IShape;
 import view.interfaces.IUndoable;
-
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteShapeCommand implements ICommand, IUndoable {
@@ -49,6 +46,7 @@ public class DeleteShapeCommand implements ICommand, IUndoable {
         for (IShape shape : cloneShapeArrayList){
             shapeList.getShapeList().add(shape);
         }
+
         shapeListReDrawCommandHandler.handleShapeListModification();
     }
 

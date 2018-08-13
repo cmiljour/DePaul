@@ -16,10 +16,6 @@ public class CopyShapeList {
         CopyShapeList.add(shape);
     }
 
-    public void printList(){
-        CopyShapeList.forEach(System.out::println);
-    }
-
     public ArrayList<IShape> getShapeList() {
         return CopyShapeList;
     }

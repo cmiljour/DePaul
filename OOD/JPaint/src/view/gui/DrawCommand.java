@@ -16,21 +16,17 @@ public class DrawCommand implements ICommand, IUndoable {
     private ApplicationState appState;
 
     public DrawCommand(ApplicationState appState, ShapeConfiguration activeShape){
-
         this.activeShape = activeShape;
         this.shapeList = appState.getShapeList();
         this.appState = appState;
         this.shapeType = activeShape.getActiveShapeType().toString();
-
     }
 
     @Override
     public void run() {
-
         shape = IShapeFactory.getShape(shapeType, activeShape);
         shape.draw();
         shapeList.add(shape);
-
     }
 
     @Override

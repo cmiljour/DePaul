@@ -17,9 +17,6 @@ public class DrawShape implements IShapeListReDrawObserver {
     public void draw (){
         for (IShape shape : shapeArrayList) {
             shape.draw();
-            // shapeList.printList();
         }
     }
-
-
 }

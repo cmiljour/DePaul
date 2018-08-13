@@ -19,7 +19,6 @@ public class CommandHistory {
 			IUndoable c = undoStack.pop();
 			redoStack.push(c);
 			c.undo();
-			System.out.println("undo command is working");
 		}
 		return result;
 	}

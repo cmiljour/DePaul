@@ -1,10 +1,7 @@
 package view.gui;
 
-import view.interfaces.ICommand;
 import view.interfaces.IShapeListReDrawHandler;
 import view.interfaces.IShapeListReDrawObserver;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,6 @@ public class ShapeListReDrawCommandHandler implements IShapeListReDrawHandler {
     @Override
     public void registerObserver(IShapeListReDrawObserver observer) {
         observers.add(observer);
-
     }
 
     @Override
@@ -29,5 +25,4 @@ public class ShapeListReDrawCommandHandler implements IShapeListReDrawHandler {
             observer.draw();
         }
     }
-
 }

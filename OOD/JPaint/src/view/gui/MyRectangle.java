@@ -13,15 +13,11 @@ public class MyRectangle implements IShape, Cloneable {
     private int y;
     private int width;
     private int height;
-    Graphics2D graphics2d;
+    private Graphics2D graphics2d;
     private ShapeConfiguration activeShape;
-
-
-
-    Rectangle rectangle;
+    private Rectangle rectangle;
 
     public MyRectangle(ShapeConfiguration activeShape){
-
         this.x = Math.min(activeShape.getActivePointsPressed().getXpoint(), activeShape.getActivePointsReleased().getXpoint());
         this.y = Math.min(activeShape.getActivePointsPressed().getYpoint(), activeShape.getActivePointsReleased().getYpoint());
         this.width = Math.abs(activeShape.getActivePointsPressed().getXpoint() - activeShape.getActivePointsReleased().getXpoint());
@@ -78,12 +74,10 @@ public class MyRectangle implements IShape, Cloneable {
 
     @Override
     public void setXarr(int index, int newVal) {
-
     }
 
     @Override
     public void setYarr(int index, int newVal) {
-
     }
 
     @Override
@@ -101,7 +95,6 @@ public class MyRectangle implements IShape, Cloneable {
 
         switch (activeShape.getActiveShapeShadingType()) {
             case FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.fillRect(x,y,width,height);
                 graphics2d.drawRect(x,y,width,height);
@@ -109,22 +102,18 @@ public class MyRectangle implements IShape, Cloneable {
                 break;
 
             case OUTLINE:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.setStroke(new BasicStroke(5));
                 graphics2d.drawRect(x,y,width,height);
 
-
                 break;
 
             case OUTLINE_AND_FILLED_IN:
-
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActivePrimaryColor()));
                 graphics2d.fillRect(x,y,width,height);
                 graphics2d.setStroke(new BasicStroke(5));
                 graphics2d.setColor(ShapeColorMap.get(activeShape.getActiveSecondaryColor()));
                 graphics2d.drawRect(x,y,width,height);
-
 
                 break;
         }

@@ -1,25 +1,18 @@
 package controller;
 
 import model.interfaces.IApplicationState;
+import model.persistence.ApplicationState;
 import view.EventName;
-
 import view.gui.CommandHistory;
-import view.gui.DeleteShapeCommand;
-import view.gui.PaintCanvas;
-
-import view.interfaces.ICommand;
-import view.interfaces.IShape;
+import view.gui.ShapeCommand;
 import view.interfaces.IUiModule;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
-    private final IApplicationState applicationState;
+    private final ApplicationState applicationState;
 
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState) {
+    public JPaintController(IUiModule uiModule, ApplicationState applicationState) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
     }
@@ -35,9 +28,9 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
         uiModule.addEvent(EventName.CHOOSE_START_POINT_ENDPOINT_MODE, () -> applicationState.setActiveStartAndEndPointMode());
-        uiModule.addEvent(EventName.COPY, () -> applicationState.copyShapes());
-        uiModule.addEvent(EventName.PASTE, () -> applicationState.pasteShapes());
-        uiModule.addEvent(EventName.DELETE, () -> applicationState.deleteShapes());
+        uiModule.addEvent(EventName.COPY, () -> new ShapeCommand(applicationState).modShape("COPY"));
+        uiModule.addEvent(EventName.PASTE, () -> new ShapeCommand(applicationState).modShape("PASTE"));
+        uiModule.addEvent(EventName.DELETE, () -> new ShapeCommand(applicationState).modShape("DELETE"));
         uiModule.addEvent(EventName.REDO, () -> CommandHistory.redo());
         uiModule.addEvent(EventName.UNDO, () -> CommandHistory.undo());
     }
