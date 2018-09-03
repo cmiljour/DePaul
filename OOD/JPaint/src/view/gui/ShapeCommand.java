@@ -33,7 +33,7 @@ public class ShapeCommand {
                 command.run();
             }
 
-            appState.getShapeListReDrawCommandHandler().handleShapeListModification();
+            // appState.getShapeListReDrawCommandHandler().handleShapeListModification();
 
         } else if(modCommand.equalsIgnoreCase("DELETE")){
             DeleteShapeCommand deleteShapeCommand = new DeleteShapeCommand(shapeList, selectedShapeList,appState.getShapeListReDrawCommandHandler());
