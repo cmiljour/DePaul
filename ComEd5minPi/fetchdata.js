@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-
 function fetchData() {
     // you might need the next line, depending on your API provider.
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -19,8 +18,36 @@ function fetchData() {
     .catch((error) => {
       console.error(error);
     });
+    var c = setTimeout(fetchData, 100000);
   }
-  
-  // call the function to start executing it when the page loads inside Electron.
-  
+
+  function startTime() {
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+
+    document.getElementById("clock").innerHTML =
+    time;
+    var t = setTimeout(startTime, 500);
+  }
+
+
 fetchData()
+startTime()
