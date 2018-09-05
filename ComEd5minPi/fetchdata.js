@@ -18,7 +18,7 @@ function fetchData() {
     .catch((error) => {
       console.error(error);
     });
-    var c = setTimeout(fetchData, 100000);
+    var c = setTimeout(fetchData, 600000);
   }
 
   function startTime() {
