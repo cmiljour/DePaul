@@ -1,6 +1,7 @@
 {
   "name": "comed5minpi",
   "version": "1.0.0",
+  "electronVersion": "2.0.8",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -10,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^12.1.1"
   }
 }
