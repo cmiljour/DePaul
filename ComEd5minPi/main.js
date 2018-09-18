@@ -6,7 +6,7 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 480, height: 320, frame: false})
+  win = new BrowserWindow({width: 800, height: 400, frame: true})
   // win.maximize()
 
   // and load the index.html of the app.
@@ -45,4 +45,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
